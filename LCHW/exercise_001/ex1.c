@@ -7,10 +7,8 @@ int main(int argc, char* argv[])
 
     // this is also comment
     printf("You are %d miles away.\n", distance);
-    printf("You are %d miles away.\n", distance * 2);
-    printf("You are %d miles away.\n", distance * 3);
-    printf("You are %d miles away.\n", distance * 4);
-    printf("You are %d miles away.\n", distance * 5);
-
+    printf("show addr. of distance in %%d %d\n", &distance);
+    printf("show addr. of distance in %%p %p\n", &distance);
+    printf("show addr. of fucntion main in %%p %p\n", main);
     return 0;
 }
