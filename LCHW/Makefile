@@ -12,4 +12,4 @@ $(EXERCISE_TARGETS):
 	make -C $(EXERCISE_DIR_PREFIX)$(shell printf %03d $@)
 
 clean:
-	rm **/*.exe
+	find . -executable -type f | xargs rm

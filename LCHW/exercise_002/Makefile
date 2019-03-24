@@ -10,4 +10,4 @@ ${NAME}:
 	${CC} ${CFLAGS} -o ${NAME} ${NAME}.c
 
 clean:
-	ls *.exe | xargs rm
+	find . -executable -type f | xargs rm
