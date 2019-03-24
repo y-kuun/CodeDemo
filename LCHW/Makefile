@@ -2,7 +2,8 @@ CC=gcc
 CFLAGS=-Wall -g -fno-builtin
 
 EXERCISE_DIR_PREFIX=exercise_
-EXERCISE_TARGETS=$(shell seq 1 3)
+LATEST_EXERCISE=4
+EXERCISE_TARGETS=$(shell seq 1 $(LATEST_EXERCISE))
 
 .PHONY: all clean
 all: $(EXERCISE_TARGETS)
