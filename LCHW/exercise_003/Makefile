@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -g
-NAME=ex1
+NAME=ex3
 
 .PHONY: all clean ${NAME}
 
