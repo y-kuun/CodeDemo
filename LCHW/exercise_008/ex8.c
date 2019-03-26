@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
     printf("The size of an int: %ld.\n", sizeof(int));
     printf("The size of areas (int[]): %ld.\n", sizeof(areas));
     printf("The number of int in areas: %ld.\n", sizeof(areas) / sizeof(int));
+    areas[10] = 'a';
     printf("The first area is %d and second is %d.\n", areas[0], areas[10]);
 
     printf("The size of a char: %ld.\n", sizeof(char));
