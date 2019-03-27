@@ -1,5 +1,5 @@
-CC=gcc
-CFLAGS=-Wall -g
+export CC=clang
+export CFLAGS=-Wall -g -fsanitize=address
 
 EXERCISE_DIR_PREFIX=exercise_
 LATEST_EXERCISE=15

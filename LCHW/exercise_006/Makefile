@@ -1,5 +1,3 @@
-CC=gcc
-CFLAGS=-Wall -g
 NAME=ex6
 
 .PHONY: all clean ${NAME}
