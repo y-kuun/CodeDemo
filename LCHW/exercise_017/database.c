@@ -5,6 +5,15 @@
 #include <string.h>
 #include "database.h"
 
+
+Connection* Database_conn(){
+    if(conn){
+        return conn; 
+    } else {
+        return NULL;
+    }
+}
+
 void Address_free(Address *addr){
     if(addr->name){
         free(addr->name);
@@ -45,6 +54,7 @@ void Database_load(Connection *conn){
         die("Failed to load MAX_ROWS database.", conn);
     }
     db->rows = malloc(sizeof(Address) * db->MAX_ROWS);
+    memset(db->rows, 0, sizeof(Address) * db->MAX_ROWS); 
     int row_num = 0;
     for(row_num = 0; row_num < db->MAX_ROWS; row_num++){
         rc = 0;
@@ -63,23 +73,27 @@ void Database_load(Connection *conn){
 }
 
 Connection* Database_open(const char *filename, char mode, int max_data, int max_rows){
-    Connection *conn = malloc(sizeof(Connection));
-    if(!conn) die("Memory error", conn);
-
-    conn->db = malloc(sizeof(Database));
-    if(!conn->db) die("Memory error", conn);
-
-    if(mode == 'c'){
-        conn->file = fopen(filename, "w"); 
-        conn->db->MAX_DATA = max_data;
-        conn->db->MAX_ROWS = max_rows;
+    if(conn) {
+        return conn; 
     } else {
-        conn->file = fopen(filename, "r+"); 
-        if(conn->file){
-            Database_load(conn); 
+        conn = malloc(sizeof(Connection));
+        if(!conn) die("Memory error", conn);
+
+        conn->db = malloc(sizeof(Database));
+        if(!conn->db) die("Memory error", conn);
+
+        if(mode == 'c'){
+            conn->file = fopen(filename, "w"); 
+            conn->db->MAX_DATA = max_data;
+            conn->db->MAX_ROWS = max_rows;
+        } else {
+            conn->file = fopen(filename, "r+"); 
+            if(conn->file){
+                Database_load(conn); 
+            }
         }
+        if(!conn->file) die("Failed to open the file", conn);
     }
-    if(!conn->file) die("Failed to open the file", conn);
     printf("Database Opened! MAX_DATA: %d, MAX_ROWS: %d\n", conn->db->MAX_DATA, conn->db->MAX_ROWS);
     return conn;
 }

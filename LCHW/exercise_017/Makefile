@@ -8,8 +8,8 @@ database:
 	${CC} ${CFLAGS} -c database.c 
 
 ${NAME}: database
-	${CC} ${CFLAGS} -o ${NAME} ${NAME}.c database.o
-	rm database.o
+	${CC} ${CFLAGS} -o ${NAME} ${NAME}.c $(patsubst %, %.o, $^)
 
 clean:
+	find . -name *.o | xargs rm
 	find . -executable -type f | xargs rm

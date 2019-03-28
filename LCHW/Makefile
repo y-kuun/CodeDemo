@@ -36,3 +36,4 @@ $(EXEC_EXERCISE_TARGETS):
 
 clean:
 	find . -executable -type f | xargs rm
+	find . -name *.o | xargs rm

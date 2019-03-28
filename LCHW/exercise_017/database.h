@@ -25,6 +25,9 @@ typedef struct {
 // Address Utils
 void Address_free(Address*);
 
+static Connection* conn;
+Connection* Database_conn();
+
 // status
 void Database_create(Connection *conn);
 void Database_load(Connection *conn);
