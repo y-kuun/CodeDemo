@@ -5,9 +5,12 @@ NAME=ex17
 all: ${NAME}
 
 database:
-	${CC} ${CFLAGS} -c database.c 
+	${CC} ${CFLAGS} -c $@.c 
 
-${NAME}: database
+simple_stack:
+	${CC} ${CFLAGS} -c $@.c
+
+${NAME}: database simple_stack
 	${CC} ${CFLAGS} -o ${NAME} ${NAME}.c $(patsubst %, %.o, $^)
 
 clean:

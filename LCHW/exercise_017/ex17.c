@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "database.h"
+#include "simple_stack.h"
+
+void test_stack();
 
 void parser_cmd_line(char cmdv[][128], int *para_cnt){
     int max_data = 128;
@@ -95,10 +98,41 @@ int main(int argc, char* argv[])
             case 'x':
                 loop = 0;
                 break;
+            case 't':
+                test_stack();
+                break;
             default:
                 printf("Invalid action, only: c=create, g=get, f=find, s=set, d=del, l=list\n");
         }
     }
     Database_close(conn);
     return 0;
+}
+
+void test_stack(){
+    init_stack(10);
+    int a = 10;
+    char *ch = "hello";
+    char *dst = malloc(20 * sizeof(char));
+    int b = 0;
+    memset(dst, 0, 20 * sizeof(char));
+
+    stack_print();
+    stack_push(&a, sizeof(int));
+    stack_print();
+    stack_push(ch, sizeof(char) * strlen(ch));
+    /*stack_push(ch, sizeof(char) * strlen(ch));*/
+    stack_print();
+    init_stack(20);
+    stack_print();
+    stack_pop(dst, sizeof(char) * strlen(ch));
+    stack_print();
+    stack_pop(&b, sizeof(int));
+    /*stack_pop(&b, sizeof(int));*/
+    stack_print();
+    
+    printf("get info from statck [%d] [%s]\n", b ,dst);
+    free(dst);
+    
+    /*destroy_stack();*/
 }
