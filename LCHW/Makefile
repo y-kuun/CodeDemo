@@ -1,5 +1,5 @@
 export CC=clang
-export CFLAGS=-Wall -g -fsanitize=address
+export CFLAGS=-Wall -g -fsanitize=address -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls
 
 EXERCISE_DIR_PREFIX=exercise_
 LATEST_EXERCISE=20
