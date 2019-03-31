@@ -26,8 +26,10 @@ int Room_int(void *self);
 
 typedef struct Map {
     Object proto;
+    int room_num;
     Room *start;
     Room *location;
+    Room **room_list;
 } Map;
 
 void *Map_move(void *self, Direction direction);

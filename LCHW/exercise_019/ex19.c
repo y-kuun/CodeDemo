@@ -13,9 +13,7 @@ int Monster_attack(void *self, int damage){
     assert(monster->_(description));
     
     printf("You attck %s!\n", monster->_(description));
-    
     monster->hit_points -= damage;
-    
     if(monster->hit_points > 0){
         printf("It is still alive.\n"); 
         return 0;
@@ -35,6 +33,7 @@ int Monster_init(void *self){
 Object MonsterProto = {
     .init = Monster_init,
     .attack = Monster_attack,
+    .destroy = Object_destroy,
 };
 
 void *Room_move(void *self, Direction direction){
@@ -75,9 +74,20 @@ int Room_attack(void *self, int damage){
     }
 }
 
+void Room_destroy(void *self){
+    Room *room = self;
+    if(room->bad_guy){
+        if(room->bad_guy->_(destroy)){
+            room->bad_guy->_(destroy)(room->bad_guy);
+        }
+    }
+    Object_destroy(room);
+}
+
 Object RoomProto = {
     .attack = Room_attack,
     .move = Room_move,
+    .destroy = Room_destroy,
 };
 
 void *Map_move(void *self, Direction direction){
@@ -106,12 +116,18 @@ int Map_init(void *self){
     assert(self);
     Map *map = self;
 
-    Room *hall = NEW(Room, "The great Hall");
-    Room *throne = NEW(Room, "The throne room");
-    Room *arena = NEW(Room, "The arena, with the minotaur");
-    Room *kitchen = NEW(Room, "Kitchen, you have the knife now");
+    map->room_num = 5;
+    map->room_list = calloc(map->room_num, sizeof(Room*));
+
+    Room *hall = map->room_list[0] = NEW(Room, "The great Hall");
+    Room *throne = map->room_list[1] = NEW(Room, "The throne room");
+    Room *arena = map->room_list[2] = NEW(Room, "The arena, with the minotaur");
+    Room *kitchen = map->room_list[3] = NEW(Room, "Kitchen, you have the knife now");
+    Room *toilet = map->room_list[4] = NEW(Room, "Toilet, you have to reset");
 
     arena->bad_guy = NEW(Monster, "The evil minotaur");
+    toilet->bad_guy = NEW(Monster, "The evil DDD");
+
     hall->north = throne;
 
     throne->west = arena;
@@ -120,6 +136,11 @@ int Map_init(void *self){
 
     arena->east = throne;
     kitchen->west = throne;
+
+    toilet->south = kitchen;
+    toilet->west = hall;
+    kitchen->north = toilet;
+    hall->east = toilet;
     
     map->start = hall;
     map->location = hall;
@@ -127,10 +148,26 @@ int Map_init(void *self){
     return 1;
 }
 
+void Map_destroy(void *self){
+    Map *map = self;
+    assert(map);
+    int i;
+    for(i = 0; i < map->room_num; i++){
+        Room* room = map->room_list[i];
+        if(room) {
+            if(room->_(destroy)) room->_(destroy)(room);
+        }
+    }
+    memset(map->room_list, 0, map->room_num * sizeof(Room*));
+    free(map->room_list);
+    Object_destroy(map);
+}
+
 Object MapProto = {
     .init = Map_init,
     .attack = Map_attack,
     .move = Map_move,
+    .destroy = Map_destroy,
 };
 
 int process_input(Map *game){
@@ -140,7 +177,7 @@ int process_input(Map *game){
     char ch = getchar();
     while(getchar() != '\n');
     int damage = rand() % 4;
-
+    /*printf("Input %d\n", ch);*/
     switch(ch) {
         case -1:
             printf("Giving up? You suck.\n");
@@ -186,5 +223,6 @@ int main(int argc, char* argv[])
     
     while(process_input(game)){
     }
+    game->_(destroy)(game);
     return 0;
 }
