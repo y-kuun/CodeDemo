@@ -41,6 +41,7 @@ void *Object_new(size_t size, Object proto, char *description){
     if(!proto.move) proto.move = Object_move;
 
     Object *el = calloc(1, size);
+    assert(el);
     *el = proto;
     assert(description);
     el->description = strdup(description);

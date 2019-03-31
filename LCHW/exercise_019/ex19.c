@@ -58,6 +58,7 @@ void *Room_move(void *self, Direction direction){
     if(next){
         next->_(describe(next)); 
     }
+    
     return next;
 }
 
@@ -101,6 +102,8 @@ void *Map_move(void *self, Direction direction){
     next = location->_(move)(location, direction);
     if(next){
         map->location = next; 
+    } else {
+        printf("There is no room to go!\n");
     }
     return next;
 }
