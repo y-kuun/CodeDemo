@@ -2,7 +2,7 @@ export CC=clang
 export CFLAGS=-Wall -g -fsanitize=address -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls
 
 EXERCISE_DIR_PREFIX=exercise_
-LATEST_EXERCISE=20
+LATEST_EXERCISE=25
 EXERCISE_TARGETS=$(shell seq 1 $(LATEST_EXERCISE))
 CREATE_EXERCISE_TARGETS=$(addprefix c, $(EXERCISE_TARGETS))
 EXEC_EXERCISE_TARGETS=$(addprefix e, $(EXERCISE_TARGETS))
@@ -17,14 +17,17 @@ $(EXERCISE_TARGETS):
 CREATE_TARGET=$(patsubst c%,%,$@)
 CREATE_DIR=$(EXERCISE_DIR_PREFIX)$(shell printf %03d $(CREATE_TARGET))
 CREATE_C_FILE=./$(CREATE_DIR)/ex$(CREATE_TARGET).c
-TMP_CREATE_CFILE=./templates/ex.c.temp
 CREATE_MAKE_FILE=./$(CREATE_DIR)/Makefile
+CREATE_DBG_FILE=./$(CREATE_DIR)/dbg.h
+TMP_CREATE_CFILE=./templates/ex.c.temp
 TMP_CREATE_MFILE=./templates/Makefile.temp
+TMP_CREATE_DFILE=./templates/dbg.h.temp
 $(CREATE_EXERCISE_TARGETS):
 	$(info creating targets $@)
 	mkdir $(CREATE_DIR)
 	cp $(TMP_CREATE_CFILE) $(CREATE_C_FILE)
 	cp $(TMP_CREATE_MFILE) $(CREATE_MAKE_FILE) 
+	cp $(TMP_CREATE_DFILE) $(CREATE_DBG_FILE) 
 	sed -i s/{TARGET_NUM}/$(CREATE_TARGET)/g $(CREATE_MAKE_FILE)
 
 EXEC_TARGET=$(patsubst e%,%,$@)
