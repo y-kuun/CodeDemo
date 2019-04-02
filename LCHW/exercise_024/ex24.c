@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
     char input_string[MAX_DATA];
     int i = 0;
     char *in = NULL;
-    char **invalid = malloc(sizeof(char*));
-    
+    char *invalid;
+
     printf("What's your First Name? ");
     in = fgets(you.first_name, MAX_DATA - 1, stdin);
     check(in != NULL, "Failed to read first name.");
@@ -38,10 +38,10 @@ int main(int argc, char* argv[])
     int rc;
     printf("How old are you? ");
     in = fgets(input_string, MAX_DATA - 1, stdin);
-    you.age = strtol(input_string, invalid, 10);
+    you.age = strtol(input_string, &invalid, 10);
     /*you.age = atoi(input_string);*/
     /*int rc = fscanf(stdin, "%d", &you.age);*/
-    check(**invalid == '\0', "Failed to read age. You have to enter a number.");
+    check(*invalid == '\0', "Failed to read age. You have to enter a number.");
     clean_errno();
 
     printf("What color are your eyes:\n");
@@ -69,10 +69,7 @@ int main(int argc, char* argv[])
     printf("Eyes: %s\n", EYE_COLOR_NAMES[you.eyes]);
     printf("Income: %f\n", you.income);
     
-    if(invalid) free(invalid);
     return 0;
 error:
-    // free(*invalid) double free
-    if(invalid) free(invalid);
     return -1;
 }
