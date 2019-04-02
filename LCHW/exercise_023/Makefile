@@ -1,5 +1,5 @@
 NAME=ex23
-
+export CFLAGS=-Wall -g
 .PHONY: all clean ${NAME}
 
 all: ${NAME}

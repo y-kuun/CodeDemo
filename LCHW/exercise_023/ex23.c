@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "dbg.h"
 
 int normal_copy(char *from, char *to, int count){
@@ -10,19 +11,32 @@ int normal_copy(char *from, char *to, int count){
     return i;
 }
 
+
+#define COPY_8(T, F) {\
+    *to++ = *from++;\
+    case 7: *T++ = *F++;\
+    case 6: *T++ = *F++;\
+    case 5: *T++ = *F++;\
+    case 4: *T++ = *F++;\
+    case 3: *T++ = *F++;\
+    case 2: *T++ = *F++;\
+    case 1: *T++ = *F++;\
+}
+
 int duffs_device(char *from, char *to, int count){
-    {
+{
         int n = (count + 7) / 8; 
         switch(count % 8){
             case 0: do {
-                        *to++ = *from++;
-                        case 7: *to++ = *from++;
-                        case 6: *to++ = *from++;
-                        case 5: *to++ = *from++;
-                        case 4: *to++ = *from++;
-                        case 3: *to++ = *from++;
-                        case 2: *to++ = *from++;
-                        case 1: *to++ = *from++;
+                        COPY_8(to, from)
+                        /**to++ = *from++;*/
+                        /*case 7: *to++ = *from++;*/
+                        /*case 6: *to++ = *from++;*/
+                        /*case 5: *to++ = *from++;*/
+                        /*case 4: *to++ = *from++;*/
+                        /*case 3: *to++ = *from++;*/
+                        /*case 2: *to++ = *from++;*/
+                        /*case 1: *to++ = *from++;*/
                     }  while(--n > 0);
         }
     }
@@ -60,29 +74,75 @@ int valid_copy(char *data, int count, char expects){
     return 1;
 }
 
+
+#define TIME_CONSUME ((double)(end - beg) / CLOCKS_PER_SEC)
+
 int main(int argc, char* argv[])
 {
-    char from[1000] = {'a'};
-    char to[1000] = {'c'};
+    // 实际上把需要拷贝的长度 n， 变成 n = floor(n/8) + n % 8
+    const long LEN = 1024 * 1024 * 64;
+    static char from[LEN] = {'a'};
+    static char to[LEN] = {'c'};
     int rc = 0;
+    clock_t beg, end;
+    log_info("Current LEN is %ld", LEN);
+    
+    beg = clock();
+    memset(from, 'x', LEN);
+    end = clock();
+    log_info("memset for x: %lf", TIME_CONSUME);
 
-    memset(from, 'x', 1000);
-    memset(to, 'y', 1000);
-    check(valid_copy(to, 1000, 'y'), "Not initialized right.");
+    beg = clock();
+    memset(to, 'y', LEN);
+    end = clock();
+    log_info("memset for y: %lf", TIME_CONSUME);
 
-    rc = normal_copy(from, to, 1000);
-    check(rc == 1000, "Normal copy failed: %d", rc);
-    check(valid_copy(to, 1000, 'x'), "Normal copy failed");
+    beg = clock();
+    memcpy(to, from, LEN);
+    end = clock();
+    log_info("memcpy : %lf", TIME_CONSUME);
 
-    memset(to, 'y', 1000);
-    rc = duffs_device(from, to, 1000);
-    check(rc == 1000, "Duff's device failed: %d", rc);
-    check(valid_copy(to, 1000, 'x'), "Duff's device failed");
+    beg = clock();
+    memmove(to, from, LEN);
+    end = clock();
+    log_info("memmove : %lf", TIME_CONSUME);
 
-    memset(to, 'y', 1000);
-    rc = zeds_device(from, to, 1000);
-    check(rc == 1000, "Zed's device failed: %d", rc);
-    check(valid_copy(to, 1000, 'x'), "Zed's device failed");
+    beg = clock();
+    strncpy(to, from, LEN);
+    end = clock();
+    log_info("strncpy : %lf", TIME_CONSUME);
+
+    memset(to, 'y', LEN);
+    beg = clock();
+    check(valid_copy(to, LEN, 'y'), "Not initialized right.");
+    end = clock();
+    log_info("valid_copy: %lf", TIME_CONSUME);
+
+    beg = clock();
+    rc = normal_copy(from, to, LEN);
+    end = clock();
+    log_info("normal_copy: %lf", TIME_CONSUME);
+
+    check(rc == LEN, "Normal copy failed: %d", rc);
+    check(valid_copy(to, LEN, 'x'), "Normal copy failed");
+
+    memset(to, 'y', LEN);
+    beg = clock();
+    rc = duffs_device(from, to, LEN);
+    end = clock();
+    log_info("duffs_device: %lf", TIME_CONSUME);
+
+    check(rc == LEN, "Duff's device failed: %d", rc);
+    check(valid_copy(to, LEN, 'x'), "Duff's device failed");
+
+    memset(to, 'y', LEN);
+    beg = clock();
+    rc = zeds_device(from, to, LEN);
+    end = clock();
+    log_info("zeds_device: %lf", TIME_CONSUME);
+
+    check(rc == LEN, "Zed's device failed: %d", rc);
+    check(valid_copy(to, LEN, 'x'), "Zed's device failed");
     log_info("All finished!");
     return 0;
 error:
