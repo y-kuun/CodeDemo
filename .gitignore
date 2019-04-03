@@ -3,3 +3,5 @@ build/
 *.asm
 *.log
 *.o
+tmp/
+temp/
