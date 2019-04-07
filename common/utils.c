@@ -80,9 +80,27 @@ error:
 int main(int argc, char *argv[]){
     if(argc < 2) return 1;
     char *data = "Hello World!";
+    char *cdata = "Hello World!";
+    char *ucdata = "Hello World!";
     base64(argv[1], strlen(argv[1]), (void**)&data);
     log_i("[%s] : [%s]", argv[1], data);
+    
+    uLongf dest_len = compressBound(strlen(argv[1]));
+    Bytef *dest = calloc(1, sizeof(Bytef) * (dest_len + 1));
+    compress(dest, &dest_len, argv[1], strlen(argv[1]));
+    base64(dest, dest_len, (void**)&cdata);
+    log_i("compress_test [%s] : [%s]", argv[1], cdata);
+
+    Bytef *src = dest;
+    uLongf src_len = dest_len;
+    dest = calloc(1, sizeof(Bytef) * (strlen(argv[1]) + 1));
+    uncompress(dest, &dest_len, src, src_len);
+    /*base64(dest, dest_len, (void**)&ucdata);*/
+    log_i("uncompress_test [%s] : [%s]", argv[1], dest);
+
+    free(src);
+    free(dest);
     free(data);
-    log_i("compress_test %p", compress);
+    free(cdata);
     return 0;
 }
