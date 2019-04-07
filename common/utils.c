@@ -2,6 +2,7 @@
 #include "include/utils.h"
 #include "include/debug.h"
 #include "zlib.h"
+#include "lz4.h"
 
 int base64(const void *in, const int size, void **out){
     const char* b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; 
@@ -46,34 +47,32 @@ error:
 }
 
 int unbase64(const void *in, const int size, void **out){
-    const char* b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"; 
-    int i = 0;
-    /*while((Byte)in[size - 1 - i] == '=') i++;*/
-    int osize = (size / 4 ) * 3 - i;
-    debug("unbase64 target size %d", osize);
-    *out = calloc(1, sizeof(char) * (osize + 1));
-    check(out != NULL, "failed to allocate mem");
-
-    int in_idx = 0;
-    int ot_idx = 0;
-    Byte *ou_p = *out;
-    const Byte *in_p = in;
-    for(in_idx = 0; in_idx < size; in_idx++){
-        ot_idx = (in_idx / 3) * 4 + in_idx % 3;
-        switch(in_idx % 3){
-            case 0: 
-                break;
-            case 1:;
-                break;
-            case 2: 
-                break;
-            case 3: 
-                break;
-        } 
-    }
-    return osize;
-error:
     return -1;
+}
+
+void lz4_test(int argc, char *argv[]){
+    log_i("lz4_test =======================");
+    char *src = argv[1];
+    char *cdata;
+    int src_len = strlen(src);
+    int dst_len = LZ4_compressBound(src_len);
+    char *dst = calloc(1, sizeof(char) * (dst_len + 1));
+    
+    dst_len = LZ4_compress_default(src, dst, src_len, dst_len);
+    base64(dst, dst_len, (void**)&cdata);
+    log_i("lz4 compress_test [%s] : [%s]", src, cdata);
+
+    src = dst;
+    dst = calloc(1, sizeof(char) * (src_len + 1));
+    dst_len = src_len;
+    src_len = strlen(src);
+    dst_len = LZ4_decompress_safe(src, dst, src_len, dst_len);
+    log_i("lz4 decompress_test [%s]", dst);
+
+    log_i("lz4_test =======================");
+    free(cdata);
+    free(src);
+    free(dst);
 }
 
 
@@ -81,23 +80,22 @@ int main(int argc, char *argv[]){
     if(argc < 2) return 1;
     char *data = "Hello World!";
     char *cdata = "Hello World!";
-    char *ucdata = "Hello World!";
     base64(argv[1], strlen(argv[1]), (void**)&data);
     log_i("[%s] : [%s]", argv[1], data);
     
     uLongf dest_len = compressBound(strlen(argv[1]));
     Bytef *dest = calloc(1, sizeof(Bytef) * (dest_len + 1));
-    compress(dest, &dest_len, argv[1], strlen(argv[1]));
+    compress(dest, &dest_len, (const Bytef*)argv[1], strlen(argv[1]));
     base64(dest, dest_len, (void**)&cdata);
-    log_i("compress_test [%s] : [%s]", argv[1], cdata);
+    log_i("libz compress_test [%s] : [%s]", argv[1], cdata);
 
     Bytef *src = dest;
     uLongf src_len = dest_len;
     dest = calloc(1, sizeof(Bytef) * (strlen(argv[1]) + 1));
     uncompress(dest, &dest_len, src, src_len);
-    /*base64(dest, dest_len, (void**)&ucdata);*/
-    log_i("uncompress_test [%s] : [%s]", argv[1], dest);
+    log_i("libz uncompress_test [%s] : [%s]", argv[1], dest);
 
+    lz4_test(argc, argv);
     free(src);
     free(dest);
     free(data);
