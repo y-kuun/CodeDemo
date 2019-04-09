@@ -2,7 +2,7 @@
 #include <apr_fnmatch.h>
 #include <unistd.h>
 
-#include "command.h"
+#include "commands.h"
 #include "dbg.h"
 #include "bstrlib.h"
 #include "db.h"
@@ -103,7 +103,7 @@ int Command_build(apr_pool_t *p, const char *url, const char *configure_opts,
     rc = Shell_exec(MAKE_SH, "OPTS", make_opts, NULL);
     check(rc == 0, "Failed to build.");
     
-    rc = Shell_exec(INSTALL_SH, "OPTS", install_opts, NULL);
+    rc = Shell_exec(INSTALL_SH, "TARGET", install_opts ? install_opts : "install", NULL);
     check(rc == 0, "Failed to install.");
 
     rc = Shell_exec(CLEANUP_SH, NULL);

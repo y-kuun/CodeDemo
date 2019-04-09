@@ -61,15 +61,13 @@ int Shell_run(apr_pool_t *p, Shell *cmd){
     check(rv == APR_SUCCESS, "Failed to run command.");
 
     rv = apr_proc_wait(&newproc, &cmd->exit_code, &cmd->exit_why, APR_WAIT);
-    check(rv == APR_SUCCESS, "Failed to wait.");
+    check(rv == APR_CHILD_DONE, "Failed to wait.");
     
     check(cmd->exit_code == 0, "%s exited badly.", cmd->exe);
     check(cmd->exit_why == APR_PROC_EXIT, "%s was killed or crashed", cmd->exe);
 
-    free(attr);
     return 0;
 error:
-    if(attr) free(attr);
     return -1;
 }
 
