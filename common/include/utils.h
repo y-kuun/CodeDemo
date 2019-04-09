@@ -12,4 +12,5 @@ typedef unsigned char Byte;
 int base64(const void *, const int size, void**);
 int unbase64(const void *, const int size, void**);
 
+int split_file(char **lines, int *size, const char* filepath);
 #endif

@@ -75,8 +75,22 @@ void lz4_test(int argc, char *argv[]){
     free(dst);
 }
 
+int split_file(char **lines, int *size, const char* filepath){
+    FILE* fp = fopen(filepath, "r");
+    size_t lnum;
+    check(fp != NULL, "failed to open file %s", filepath);
+    int rc = getline(lines, &lnum, fp);
+    check(rc != -1, "failed to getline");
+    *size = lnum;
+    if(fp) free(fp);
+    return 0;
+error:
+    if(fp) free(fp);
+    if(*lines) free(*lines);
+    return -1;
+}
 
-int main(int argc, char *argv[]){
+int base64_test(int argc, char *argv[]){
     if(argc < 2) return 1;
     char *data = "Hello World!";
     char *cdata = "Hello World!";
@@ -100,5 +114,18 @@ int main(int argc, char *argv[]){
     free(dest);
     free(data);
     free(cdata);
+    return 0;
+}
+
+int main(int argc, char *argv[]){
+    if(argc < 2) return 1;
+    FILE* fp = fopen(argv[1], "r");
+    char *line = NULL;
+    size_t size;
+    int rc;
+    while((rc = getline(&line, &size, fp)) != EOF){
+        printf("%d:%lu:%s", rc, size, line); 
+    }
+    free(line);
     return 0;
 }
