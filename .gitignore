@@ -5,3 +5,4 @@ build/
 *.o
 tmp/
 temp/
+*.swp
