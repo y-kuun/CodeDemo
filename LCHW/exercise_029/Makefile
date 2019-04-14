@@ -16,7 +16,6 @@ $(SO_TARGET): build $(SO_OBJS)
 $(TARGET): build $(OBJS)
 	$(CC) -o $@ $(OBJS) -ldl
 
-
 build:
 	@mkdir -p build
 	@mkdir -p bin
