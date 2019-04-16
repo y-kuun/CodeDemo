@@ -1,5 +1,5 @@
 NAME=ex29
-CFLAGS=-g -O2 -Wall -Wextra -DNDEBUG $(OPTFLAGS)
+CFLAGS=-g -O2 -Wall -Wextra -DNDEBUG -fsanitize=address -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls $(OPTFLAGS)
 
 SO_TARGET=build/lib$(NAME).so
 TARGET=build/$(NAME)

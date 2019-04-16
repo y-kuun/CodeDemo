@@ -2,7 +2,7 @@ export CC=clang
 export CFLAGS=-Wall -g -fsanitize=address -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls
 
 EXERCISE_DIR_PREFIX=exercise_
-LATEST_EXERCISE=30
+LATEST_EXERCISE=40
 EXERCISE_TARGETS=$(shell seq 1 $(LATEST_EXERCISE))
 CREATE_EXERCISE_TARGETS=$(addprefix c, $(EXERCISE_TARGETS))
 EXEC_EXERCISE_TARGETS=$(addprefix e, $(EXERCISE_TARGETS))
