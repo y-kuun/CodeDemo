@@ -1,5 +1,6 @@
 #include <windows.h>
 
+// refer to MSDN at least one time
 /*
 	LRESULT CALLBACK WindowProc(
 	_In_ HWND   hwnd,
@@ -11,16 +12,19 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    // wParam, lParam both depends on the value of uMsg
 	LRESULT result = 0;
 
 	switch(uMsg){
 		case WM_SIZE:
 		{
+            // ANSI version of chars
 			OutputDebugStringA("WM_SIZE\n");
 		} break;
-
+        
 		case WM_DESTROY:
 		{
+            PostQuitMessage(0);
 			OutputDebugStringA("WM_DESTROY\n");
 		} break;
 
@@ -95,6 +99,7 @@ WinMain(HINSTANCE hInstance,
 	// WindowClass.hIcon = ;
 	WindowClass.lpszClassName = "HanmadeHeroWindowsClass";
     //MessageBox(0, "This is handmade hero!", "Handmade Hero", MB_OK | MB_ICONINFORMATION);
+
 #if 0
 	HWND CreateWindowExA(
 	DWORD     dwExStyle,
@@ -110,9 +115,11 @@ WinMain(HINSTANCE hInstance,
 	HINSTANCE hInstance,
 	LPVOID    lpParam
 	);
-#endif	
+#endif
+    
 	if(RegisterClass(&WindowClass)){
-		HWND WindowHandle = CreateWindowEx(
+        // A might mean string are handle in unicode
+		HWND WindowHandle = CreateWindowExA(
 			0, WindowClass.lpszClassName, "Handmade Hero", WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 			CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, hInstance, 0);
 		if(WindowHandle)
@@ -127,9 +134,12 @@ WinMain(HINSTANCE hInstance,
 #endif
 			MSG message;
 			for(;;){
+                // more realtime process message peekmeesage
 				BOOL messageResult = GetMessageA(&message, 0, 0, 0);
 				if(messageResult){
-					TranslateMessage(&message); 
+                    // handle key word messages
+					TranslateMessage(&message);
+                    // windows prefer to dispatch the message its self
 					DispatchMessage(&message); 
 				} else {
 					break;
