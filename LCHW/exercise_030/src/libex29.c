@@ -16,7 +16,7 @@ int uppercase(const char *msg){
     int i = 0;
 
     for(i = 0; msg[i] != '\0'; i++){
-	printf("%c", toupper(msg[i]));
+        printf("%c", toupper(msg[i]));
     }
     printf("\n");
 
@@ -27,7 +27,7 @@ int uppercase_safe(const char *msg, const int n){
     int i = 0;
 
     for(i = 0; msg[i] != '\0' && i < n; i++){
-	printf("%c", toupper(msg[i]));
+        printf("%c", toupper(msg[i]));
     }
     printf("\n");
 
@@ -38,7 +38,7 @@ int lowercase(const char *msg){
     int i = 0;
 
     for(i = 0; msg[i] != '\0'; i++){
-	printf("%c", toupper(msg[i]));
+        printf("%c", tolower(msg[i]));
     }
     printf("\n");
 
@@ -49,7 +49,7 @@ int lowercase_safe(const char *msg, const int n){
     int i = 0;
 
     for(i = 0; msg[i] != '\0' && i < n; i++){
-	printf("%c", toupper(msg[i]));
+        printf("%c", tolower(msg[i]));
     }
     printf("\n");
 
@@ -63,4 +63,3 @@ int fail_on_purpose(const char *msg){
 int fail_on_purpose_safe(const char *msg, const int n){
     return 1;
 }
-
