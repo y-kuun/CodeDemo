@@ -12,9 +12,8 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    // wParam, lParam both depends on the value of uMsg
+    // wParam, lParam both depend on the value of uMsg
 	LRESULT result = 0;
-
 	switch(uMsg){
 		case WM_SIZE:
 		{
