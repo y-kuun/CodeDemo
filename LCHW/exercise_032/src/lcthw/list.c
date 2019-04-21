@@ -97,6 +97,70 @@ void *List_remove(List *list, ListNode *node){
     list->count--;
     result = node->value;
     free(node);
-error:
+ error:
     return result;
+}
+
+List *List_copy_shallow(List **des, List *src)
+{
+    *des = NULL;
+    if(src)
+    {
+        *des = calloc(1, sizeof(List));
+        check_mem(des);
+        memcpy(*des, src, sizeof(List));
+    }
+    return *des;
+ error:
+    *des = NULL;
+    return *des;
+}
+
+List *List_copy_deep(List **des, List *src)
+{
+    *des = NULL;
+    if(src)
+    {
+        *des = calloc(1, sizeof(List));
+        check_mem(des);
+        LIST_FOREACH(src, first, next, cur)
+        {
+            // TODO(ykdu) check push result
+            List_push(*des, cur->value);
+        }
+    }
+    return *des;
+ error:
+    List_clear_destroy(*des);
+    *des = NULL;
+    return *des;
+}
+
+
+List *List_concat(List *des, List *src){
+    if(!des && !src) return NULL;
+    
+    List *res = calloc(1, sizeof(List));
+    check_mem(res);
+    if(des)
+    {
+        LIST_FOREACH(des, first, next, cur)
+        {
+            // TODO(ykdu) check push result            
+            List_push(res, cur->value);
+        }
+    }
+    if(src)
+    {
+        LIST_FOREACH(src, first, next, cur1)
+        {
+            // TODO(ykdu) check push result
+            List_push(res, cur1->value);
+        }
+    }
+    return res;
+ error:
+    List_clear_destroy(res);
+    res = NULL;
+    return res;
 }
