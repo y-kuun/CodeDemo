@@ -123,10 +123,14 @@ List *List_copy_deep(List **des, List *src)
     {
         *des = calloc(1, sizeof(List));
         check_mem(des);
+        // USE a cnt to check push result
+        int list_node_cnt = 0;
         LIST_FOREACH(src, first, next, cur)
         {
             // TODO(ykdu) check push result
             List_push(*des, cur->value);
+            list_node_cnt++;
+            check(list_node_cnt == (*des)->count, "Failed to push");
         }
     }
     return *des;
@@ -136,28 +140,32 @@ List *List_copy_deep(List **des, List *src)
     return *des;
 }
 
+List *List_append(List *des, List *src)
+{
+    if( des && src)
+    {
+        // USE a cnt to check push result
+        int list_node_cnt = 0;
+        LIST_FOREACH(src, first, next, cur)
+        {
+            List_push(des, cur->value);
+            list_node_cnt++;
+            check(list_node_cnt == des->count, "Failed to push");                    }
+    }
+    return des;
+ error:
+    return NULL;
+}
+
 
 List *List_concat(List *des, List *src){
     if(!des && !src) return NULL;
     
     List *res = calloc(1, sizeof(List));
     check_mem(res);
-    if(des)
-    {
-        LIST_FOREACH(des, first, next, cur)
-        {
-            // TODO(ykdu) check push result            
-            List_push(res, cur->value);
-        }
-    }
-    if(src)
-    {
-        LIST_FOREACH(src, first, next, cur1)
-        {
-            // TODO(ykdu) check push result
-            List_push(res, cur1->value);
-        }
-    }
+    // USE a cnt to check push result
+    if(des) List_append(res, des);
+    if(src) List_append(res, src);    
     return res;
  error:
     List_clear_destroy(res);

@@ -32,6 +32,7 @@ void *List_shift(List *list);
 
 void *List_remove(List *list, ListNode *node);
 
+List *List_append(List *des, List *src);
 List *List_concat(List *des, List *src);
 List *List_copy_shallow(List **des, List *src);
 List *List_copy_deep(List **des, List *src);
