@@ -5,9 +5,12 @@ List *List_create(){
     return calloc(1, sizeof(List));
 }
 
-void List_destroy(List *list){
-    LIST_FOREACH(list, first, next, cur) {
-        if(cur->prev){
+void List_destroy(List *list)
+{
+    LIST_FOREACH(list, first, next, cur)
+    {
+        if(cur->prev)
+        {
             free(cur->prev);
         }
     }
@@ -15,23 +18,47 @@ void List_destroy(List *list){
     free(list);
 }
 
-void List_clear(List *list){
-    LIST_FOREACH(list, first, next, cur){
-        if(cur->value){
+void List_clear(List *list)
+{
+    LIST_FOREACH(list, first, next, cur)
+    {
+        if(cur->value)
+        {
             free(cur->value);
         }
     }
 }
 
-void List_clear_destroy(List *list){
+void List_clear_destroy(List *list)
+{
+#if 0
     List_clear(list);
     List_destroy(list);
+#else
+    LIST_FOREACH(list, first, next, cur) {
+        if(cur->prev)
+        {
+            free(cur->prev);
+        }
+        if(cur->value)
+        {
+            free(cur->value);
+        }
+    }
+    free(list->last);
+    free(list);
+
+#endif
+    
+
 }
 
-void List_push(List *list, void *value){
+void List_push(List *list, void *value)
+{
     ListNode *node = calloc(1, sizeof(ListNode));
     check_mem(node);
-
+    node->value = value;
+    
     if(list->last == NULL){
         list->first = node;
         list->last = node;
@@ -40,7 +67,6 @@ void List_push(List *list, void *value){
         node->prev = list->last;
         list->last = node;
     }
-
     list->count++;
 error:
     return;
@@ -106,12 +132,13 @@ List *List_copy_shallow(List **des, List *src)
     *des = NULL;
     if(src)
     {
-        *des = calloc(1, sizeof(List));
-        check_mem(des);
+        *des = List_create();
+        check_mem(*des);
         memcpy(*des, src, sizeof(List));
     }
     return *des;
- error:
+error:
+    List_clear_destroy(*des);
     *des = NULL;
     return *des;
 }
@@ -121,10 +148,10 @@ List *List_copy_deep(List **des, List *src)
     *des = NULL;
     if(src)
     {
-        *des = calloc(1, sizeof(List));
-        check_mem(des);
+        *des = List_create();
+        check_mem(*des);
         // USE a cnt to check push result
-        int list_node_cnt = 0;
+        int list_node_cnt = (*des)->count;
         LIST_FOREACH(src, first, next, cur)
         {
             // TODO(ykdu) check push result
@@ -145,7 +172,7 @@ List *List_append(List *des, List *src)
     if( des && src)
     {
         // USE a cnt to check push result
-        int list_node_cnt = 0;
+        int list_node_cnt = des->count;
         LIST_FOREACH(src, first, next, cur)
         {
             List_push(des, cur->value);
@@ -161,7 +188,7 @@ List *List_append(List *des, List *src)
 List *List_concat(List *des, List *src){
     if(!des && !src) return NULL;
     
-    List *res = calloc(1, sizeof(List));
+    List *res = List_create();
     check_mem(res);
     // USE a cnt to check push result
     if(des) List_append(res, des);
