@@ -11,9 +11,11 @@ void List_destroy(List *list)
     {
         if(cur->prev)
         {
+            // debug("List destroy %p", cur->prev);
             free(cur->prev);
         }
     }
+    // debug("List destroy %p", list->last);    
     free(list->last);
     free(list);
 }
@@ -56,6 +58,7 @@ void List_clear_destroy(List *list)
 void List_push(List *list, void *value)
 {
     ListNode *node = calloc(1, sizeof(ListNode));
+    // debug("List_push %p", node);
     check_mem(node);
     node->value = value;
     

@@ -5,8 +5,8 @@
 
 typedef int (*List_compare)(const void*, const void*);
 
-List *List_merge_sort(List *word, List_compare cmp);
+List *List_merge_sort(const List * const word, List_compare cmp);
 
-List *List_bubble_sort(List *word, List_compare cmp);
+int List_bubble_sort(List *word, List_compare cmp);
 
 #endif

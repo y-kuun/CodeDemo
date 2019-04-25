@@ -1,6 +1,6 @@
 LCTHW_LIB_NAME=lcthw
 CC=clang
-CFLAGS=-g -O2 -Wall -Wextra -fsanitize=address -O1 -fno-omit-frame-pointer -fno-optimize-sibling-calls $(OPTFLAGS)
+export CFLAGS=-g -O0 -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls $(OPTFLAGS) $(DEBUG)
 
 SO_LCTHW=build/lib${LCTHW_LIB_NAME}.so
 STATIC_LCTHW=build/lib$(LCTHW_LIB_NAME).a
@@ -13,7 +13,7 @@ all: $(SO_LCTHW) $(STATIC_LCTHW) $(TEST_TARGET)
 
 $(SO_LCTHW): OPTFLAGS+=-fPIC -Isrc
 $(SO_LCTHW): build $(LCTHW_OBJS)
-	$(CC) -shared -o $@ $(LCTHW_OBJS)
+	$(CC) -shared -o $@ $(LCTHW_OBJS) $(CFLAGS)
 
 $(STATIC_LCTHW): OPTFLAGS+=-fPIC -Isrc
 $(STATIC_LCTHW): build $(LCTHW_OBJS)
