@@ -27,7 +27,7 @@ global_variable int BitmapHeight;
 global_variable int BytesPerPixel = 4;
 
 internal void
-RenderWeirdGradient(int XOffset, int YOffset)
+RenderWeirdGradient(int BlueOffset, int GreenOffset)
 {
     int Pitch = BitmapWidth * BytesPerPixel;
     // int8_t *Row = (int8_t*)BitmapMemory;
@@ -36,12 +36,13 @@ RenderWeirdGradient(int XOffset, int YOffset)
         // int32_t *Pixel = (int32_t*)Row;
         for(int X = 0; X < BitmapWidth; X++)
         {
-            int32_t *Pixel = (int32_t*)((char*)BitmapMemory + (Pitch * Y + BytesPerPixel * X));
+            uint32_t *Pixel = (uint32_t*)((char*)BitmapMemory + (Pitch * Y + BytesPerPixel * X));
             // NOTE(ykdu) highest byte is not used  0x00RRGGBB
-            // LITTLE ENDIAN ARCHITECHTURE, uint32 in memory  BB GG RR 00
+            // LITTLE ENDIAN ARCHITECHTURE, uint32 in memory  BB GG RR xx
+            // Register: xx RR GG BB
             // if use int8_t here will cause overflow shit
-            uint8_t Blue =  (X + XOffset);
-            uint8_t Green = (Y + YOffset);
+            uint8_t Blue =  (X + BlueOffset);
+            uint8_t Green = (Y + Green Offset);
             *Pixel = ((Green << 8) | Blue);
             Pixel++;
         }
