@@ -1,0 +1,35 @@
+Process Begins !!!!
+2019-04-29 00:18:38(615)
+=====================================
+
+darray_tests.c:55:5: warning: implicit declaration of function 'DArray_free' is invalid in C99 [-Wimplicit-function-declaration]
+    DArray_free(val_check);
+    ^
+darray_tests.c:69:99: error: too few arguments provided to function-like macro invocation
+    mu_assert((unsigned int)array->max == old_max + array->expand_ratem "Wrong size after expand.");
+                                                                                                  ^
+./minunit.h:11:9: note: macro 'mu_assert' defined here
+#define mu_assert(test, message) if(!(test)) { log_err(message); return message; }
+        ^
+darray_tests.c:69:5: error: use of undeclared identifier 'mu_assert'; did you mean '__assert'?
+    mu_assert((unsigned int)array->max == old_max + array->expand_ratem "Wrong size after expand.");
+    ^~~~~~~~~
+    __assert
+/usr/include/assert.h:81:13: note: '__assert' declared here
+extern void __assert (const char *__assertion, const char *__file, int __line)
+            ^
+darray_tests.c:69:5: warning: expression result unused [-Wunused-value]
+    mu_assert((unsigned int)array->max == old_max + array->expand_ratem "Wrong size after expand.");
+    ^~~~~~~~~
+darray_tests.c:90:11: warning: equality comparison result unused [-Wunused-comparison]
+    for(i == 999; i >= 0; i++)
+        ~~^~~~~~
+darray_tests.c:90:11: note: use '=' to turn this equality comparison into an assignment
+    for(i == 999; i >= 0; i++)
+          ^~
+          =
+3 warnings and 2 errors generated.
+
+=====================================
+Process Finished !!!!
+2019-04-29 00:18:38(694)

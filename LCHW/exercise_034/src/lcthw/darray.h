@@ -5,6 +5,8 @@
 #include <assert.h>
 #include <lcthw/dbg.h>
 
+#define DEFAULT_EXPAND_RATE 300
+
 typedef struct DArray
 {
     int end;
@@ -65,9 +67,19 @@ error:
 
 static inline void *DArray_new(DArray *array)
 {
+    // allocate a new memory area with element size
     check(array->element_size > 0, "Can't use DArray_new on 0 size DArrays.");
     return calloc(1, array->element_size);
 error:
+    return NULL;
+}
+
+static inline void *DArray_free(void *ele)
+{
+    if(ele)
+    {
+        free(ele);
+    }
     return NULL;
 }
 
