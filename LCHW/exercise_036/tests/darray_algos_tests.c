@@ -41,7 +41,6 @@ char *run_sort_test(int (*func)(DArray*, DArray_compare), const char *name)
     mu_assert(rc == 0, "sort failed");
     mu_assert(is_sorted(words), "didn't sort it");
     DArray_destroy(words);
-
     return NULL;
 }
 
