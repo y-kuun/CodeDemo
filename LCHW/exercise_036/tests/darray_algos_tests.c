@@ -9,9 +9,9 @@ int testcmp(char **a, char **b)
 DArray *create_words()
 {
     DArray *result = DArray_create(0, 5);
-    char *words[] = {"asdfasfd", "werwar", "13234", "asdfasfd", "oioj"};
+    char *words[] = {"asdfasfd", "werwar", "13234", "asdfasfd", "oioj", "ue7823", "000123", "-123123", "safhjjks", "jsdfghkjkjshd", "83274rhjskndb7382tweyuidhj"};
     int i = 0;
-    for(i = 0; i < 5; i++)
+    for(i = 0; i < 11; i++)
     {
         DArray_push(result, words[i]);
     }
