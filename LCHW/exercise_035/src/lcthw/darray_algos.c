@@ -1,5 +1,8 @@
 #include <string.h>
+#include <stdlib.h>
 #include <lcthw/darray_algos.h>
+
+#define USE_STANDARD_LIB
 
 static void exchange(void **content, int dst, int src)
 {
@@ -8,7 +11,7 @@ static void exchange(void **content, int dst, int src)
     content[src] = tmp;
 }
 
-
+#ifndef USE_STANDARD_LIB
 static int qsort_helper(void **content, int lhs, int rhs, DArray_compare cmp)
 {
     int l, r, rs;
@@ -137,22 +140,36 @@ error:
     if(rcontent) free(rcontent);
     return -1;
 }
+#endif
 
 int DArray_qsort(DArray *array, DArray_compare cmp)
 {
     debug("qsort_helper starts");
     // real idx should be passed
-    return  qsort_helper(array->contents, 0, DArray_count(array) - 1, cmp);
+#ifdef USE_STANDARD_LIB
+    qsort(array->contents, DArray_count(array), sizeof(void*), cmp);
+    return 0;
+#else
+    return qsort_helper(array->contents, 0, DArray_count(array) - 1, cmp);
+#endif
 }
 
 int DArray_heapsort(DArray *array, DArray_compare cmp)
 {
     debug("heapsort_helper starts");
+#ifdef USE_STANDARD_LIB
+    // return heapsort(array->contents, DArray_count(array), sizeof(void*), cmp);        
+#else
     return heapsort_helper(array->contents, 0, DArray_count(array) - 1, cmp);
+#endif
 }
 
 int DArray_mergesort(DArray *array, DArray_compare cmp)
 {
     debug("mergesort_helper starts");
+#ifdef USE_STANDARD_LIB
+    // return mergesort(array->contents, DArray_count(array), sizeof(void*), cmp);    
+#else
     return  mergesort_helper(array->contents, 0, DArray_count(array) - 1, cmp);
+#endif
 }
