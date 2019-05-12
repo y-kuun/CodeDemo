@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <lcthw/darray_algos.h>
 
-#define USE_STANDARD_LIB
+// #define USE_STANDARD_LIB
 
 static void exchange(void **content, int dst, int src)
 {
