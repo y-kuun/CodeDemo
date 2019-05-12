@@ -52,10 +52,12 @@ static int heapsort_helper(void **content, int lhs, int rhs, DArray_compare cmp)
     while(cur_len > 0)
     {
         int mid = 0;
+        int lidx, ridx, sidx;
+        void *lchild, *rchild, *root;
+        // print_array(heap_content, max - 1);
         for(mid = cur_len / 2 - 1; mid >= 0; mid--)
         {
-            int lidx, ridx, sidx;
-            void *lchild, *rchild, *root;
+
             lidx = mid * 2 + 1;
             ridx = mid * 2 + 2 < cur_len ? mid * 2 + 2 : lidx;
             // debug("lidx %d mid %d rid %d cur len %d", lidx, mid, ridx, cur_len);
@@ -67,8 +69,11 @@ static int heapsort_helper(void **content, int lhs, int rhs, DArray_compare cmp)
                 exchange(heap_content, mid, sidx);
             }
         }
+        // debug("heap_content[0] [%s] wins this around", (char*)heap_content[0]);
         // small heap get the smallest one
         content[max - cur_len] = heap_content[0];
+        // the elements who wins should be poped and pushed back
+        exchange(heap_content, 0, cur_len - 1);
         cur_len -= 1;
     }
     if(heap_content) free(heap_content);
@@ -173,4 +178,37 @@ int DArray_mergesort(DArray *array, DArray_compare cmp)
 #else
     return  mergesort_helper(array->contents, 0, DArray_count(array) - 1, cmp);
 #endif
+}
+
+void** DArray_find(DArray *array, DArray_compare cmp, void *el)
+{
+    void **data = array->contents;
+    int lidx = 0;
+    int ridx = DArray_count(array) - 1;
+
+    // debug
+    // print_array(data, ridx);
+
+    while(lidx <= ridx){
+        int mid = lidx + (ridx - lidx) / 2;
+        int rc = cmp(data + mid, &el);
+
+        char *ts0, *ts2;
+        ts0 = el;
+        ts2 = *(data + mid);
+        // debug("mid %d %s rc %d %s cmp ", mid, ts2, rc, ts0);
+        if(rc > 0)
+        {
+            ridx = mid - 1;
+        }
+        else if(rc < 0)
+        {
+            lidx = mid + 1;
+        }
+        else
+        {
+            return data + mid;
+        }
+    }
+    return NULL;
 }

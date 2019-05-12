@@ -42,11 +42,24 @@ char *run_sort_test(int (*func)(DArray*, DArray_compare), const char *name)
     int rc = func(words, (DArray_compare)testcmp);
     mu_assert(rc == 0, "sort failed");
     mu_assert(is_sorted(words), "didn't sort it");
+    print_array(words->contents, DArray_count(words) - 1);
     // DArray_push(words, new_add);
     // rc = func(words, (DArray_compare)testcmp);    
     rc = DArray_sort_add(words, func, (DArray_compare)testcmp, new_add);
     mu_assert(rc == 0, "sort failed");
-    mu_assert(is_sorted(words), "didn't sort it");    
+    mu_assert(is_sorted(words), "didn't sort it");
+    print_array(words->contents, DArray_count(words) - 1);
+
+    char *words_arr[] = {"asdfasfd", "werwar", "13234", "asdfasfd", "oioj", "ue7823", "000123", "-123123", "safhjjks", "jsdfghkjkjshd", "83274rhjskndb7382tweyuidhj"};
+    int i = 0;
+    for(i = 0; i < 5; i++)
+    {
+        // debug("Try to find %d %s", i, words_arr[i]);
+        void **data = DArray_find(words, (DArray_compare)testcmp, words_arr[i]);
+        mu_assert(data != NULL, "find failed!!");
+        mu_assert(((DArray_compare)testcmp)(data, &words_arr[i]) == 0, "find invalid result");
+    }
+    
     DArray_destroy(words);
     return NULL;
 }
