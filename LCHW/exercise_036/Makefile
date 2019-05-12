@@ -34,3 +34,5 @@ clean:
 	find . -name "*.gc*" -exec rm {} \;
 	find . -name "*.o" -exec rm {} \;
 	rm -rf `find . -name "*.dSYM" -print`
+	@echo "Please run `git clean -X` to remove fellowing files"
+	git clean -X -n
