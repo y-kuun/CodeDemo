@@ -1,0 +1,26 @@
+DEBUG tests/darray_algos_tests.c:74: ----- RUNNING: ./build/darray_algos_tests
+DEBUG tests/darray_algos_tests.c:67: 
+----- test_qsort
+DEBUG tests/darray_algos_tests.c:39: --- Testing qsort sorting algorithm
+DEBUG src/lcthw/darray_algos.c:22: current l 0 r 4
+DEBUG src/lcthw/darray_algos.c:25: current l 0 r 4
+DEBUG src/lcthw/darray_algos.c:25: current l 0 r 3
+DEBUG src/lcthw/darray_algos.c:28: current l 0 r 2
+DEBUG src/lcthw/darray_algos.c:32: current l 0 r 2
+DEBUG src/lcthw/darray_algos.c:22: current l 1 r 2
+DEBUG src/lcthw/darray_algos.c:25: current l 1 r 2
+DEBUG src/lcthw/darray_algos.c:28: current l 1 r 1
+DEBUG src/lcthw/darray_algos.c:37: current l 1 r 1
+DEBUG src/lcthw/darray_algos.c:22: current l 2 r 4
+DEBUG src/lcthw/darray_algos.c:28: current l 2 r 4
+DEBUG src/lcthw/darray_algos.c:32: current l 2 r 4
+DEBUG src/lcthw/darray_algos.c:32: current l 3 r 4
+DEBUG src/lcthw/darray_algos.c:37: current l 4 r 4
+DEBUG src/lcthw/darray_algos.c:22: current l 2 r 3
+DEBUG src/lcthw/darray_algos.c:28: current l 2 r 3
+DEBUG src/lcthw/darray_algos.c:32: current l 2 r 3
+DEBUG src/lcthw/darray_algos.c:37: current l 3 r 3
+-----
+RUNNING: ./build/darray_algos_tests
+ALL TESTS PASSED
+Tests run: 1
