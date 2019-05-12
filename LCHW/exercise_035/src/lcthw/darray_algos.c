@@ -52,12 +52,13 @@ static int heapsort_helper(void **content, int lhs, int rhs, DArray_compare cmp)
     while(cur_len > 0)
     {
         int mid = 0;
-        for(mid = cur_len / 2; mid >= 0; mid--)
+        for(mid = cur_len / 2 - 1; mid >= 0; mid--)
         {
             int lidx, ridx, sidx;
             void *lchild, *rchild, *root;
-            lidx = mid * 2;
-            ridx = mid * 2 + 1 < cur_len ? mid * 2 + 1 : lidx;
+            lidx = mid * 2 + 1;
+            ridx = mid * 2 + 2 < cur_len ? mid * 2 + 2 : lidx;
+            // debug("lidx %d mid %d rid %d cur len %d", lidx, mid, ridx, cur_len);
             root = heap_content[mid];
             lchild = heap_content[lidx];
             rchild = heap_content[ridx];
@@ -144,7 +145,7 @@ error:
 
 int DArray_qsort(DArray *array, DArray_compare cmp)
 {
-    debug("qsort_helper starts");
+    debug("qsort_helper(%d) starts", DArray_count(array));
     // real idx should be passed
 #ifdef USE_STANDARD_LIB
     qsort(array->contents, DArray_count(array), sizeof(void*), cmp);
@@ -156,7 +157,7 @@ int DArray_qsort(DArray *array, DArray_compare cmp)
 
 int DArray_heapsort(DArray *array, DArray_compare cmp)
 {
-    debug("heapsort_helper starts");
+    debug("heapsort_helper(%d) starts", DArray_count(array));
 #ifdef USE_STANDARD_LIB
     // return heapsort(array->contents, DArray_count(array), sizeof(void*), cmp);        
 #else
@@ -166,7 +167,7 @@ int DArray_heapsort(DArray *array, DArray_compare cmp)
 
 int DArray_mergesort(DArray *array, DArray_compare cmp)
 {
-    debug("mergesort_helper starts");
+    debug("mergesort_helper(%d) starts", DArray_count(array));
 #ifdef USE_STANDARD_LIB
     // return mergesort(array->contents, DArray_count(array), sizeof(void*), cmp);    
 #else
