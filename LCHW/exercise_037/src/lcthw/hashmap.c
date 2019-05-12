@@ -66,8 +66,8 @@ void Hashmap_destroy(Hashmap *map)
                     }
                     DArray_destroy(bucket);
                 }
-                DArray_destroy(map->buckets);
             }
+            DArray_destroy(map->buckets);
         }
         free(map);
     }
@@ -92,6 +92,7 @@ static inline DArray *Hashmap_find_bucket(Hashmap *map, void *key, int create, u
     // conflict will happen here, sort it will do another mod to get another position in the list
     int bucket_n = hash % DEFAULT_NUMBER_OF_BUCKETS;
     check(bucket_n >= 0, "Invalid bucket found: %d", bucket_n);
+    debug("find bucket %d", bucket_n);
     *hash_out = hash;
 
     DArray *bucket = DArray_get(map->buckets, bucket_n);
@@ -164,7 +165,7 @@ int Hashmap_traverse(Hashmap *map, Hashmap_traverse_cb traverse_cb)
         DArray *bucket = DArray_get(map->buckets, i);
         if(bucket)
         {
-            for(j = 0; j < DArray_count(bucket); i++)
+            for(j = 0; j < DArray_count(bucket); j++)
             {
                 HashmapNode *node = DArray_get(bucket, j);
                 rc = traverse_cb(node);
