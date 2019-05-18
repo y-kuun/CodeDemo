@@ -47,7 +47,7 @@ global_variable win32_offscreen_buffer GlobalBackbuffer;
 typedef X_INPUT_SET_STATE(x_input_set_state);
 X_INPUT_SET_STATE(XInputSetStateStub)
 {
-    return(0);
+    return(ERROR_DEVICE_NOT_CONNECTED);
 }
 global_variable x_input_set_state *XInputSetState_ = XInputSetStateStub;
 #define XInputSetState XInputSetState_
@@ -56,7 +56,7 @@ global_variable x_input_set_state *XInputSetState_ = XInputSetStateStub;
 typedef X_INPUT_GET_STATE(x_input_get_state);
 X_INPUT_GET_STATE(XInputGetStateStub)
 {
-    return(0);
+    return(ERROR_DEVICE_NOT_CONNECTED);    
 }
 global_variable x_input_get_state *XInputGetState_ = XInputGetStateStub;
 #define XInputGetState XInputGetState_
@@ -64,11 +64,18 @@ global_variable x_input_get_state *XInputGetState_ = XInputGetStateStub;
 internal void
 win32LoadXInput(void)
 {
-    HMODULE XInputLibrary = LoadLibrary("xinput1_3.dll");
+    HMODULE XInputLibrary = LoadLibrary("xinput1_4.dll");
+    if(!XInputLibrary)
+    {
+        XInputLibrary = LoadLibrary("xinput1_3.dll");
+    }
     if(XInputLibrary)
     {
         XInputGetState = (x_input_get_state*)GetProcAddress(XInputLibrary, "XInputGetState");
+        if(!XInputGetState) { XInputGetState = XInputGetStateStub;}
+        
         XInputSetState = (x_input_set_state*)GetProcAddress(XInputLibrary, "XInputSetState");
+        if(!XInputSetState) { XInputSetState = XInputSetStateStub;}
     }
 }
 
@@ -146,13 +153,13 @@ Win32DisplayBufferInWindow(win32_offscreen_buffer *Buffer, HDC DeviceContext, in
         DIB_RGB_COLORS, SRCCOPY);
 }
 
-void win32KeyDownHandler(WPARAM key)
+void win32KeyDownHandler(WPARAM Key, LPARAM BitMask)
 {
     // move with hjkl
     // TODO(ykdu): use marcro instead of intermediate numbers
     // NOTE(ykdu): if you input two key at the same time, how ever only one VK message will be provoked,
     // may be we should using key down to handle this multiple key inputed at the same time, otherwise `GetKeyboardState` `GetAsyncKeyState`
-    switch(key)
+    switch(Key)
     {
         case 0x4A: // j
         {
@@ -173,10 +180,19 @@ void win32KeyDownHandler(WPARAM key)
         {
             XOffset -= 10;
         } break;
+
+        case VK_F4:
+        {
+            // on windows 10 WM_CLOSE message will be provoked before this alt-f4
+            if(BitMask & (1 << 29))
+            {
+                GlobalRunning = false;
+            }
+        } break;
         
         default:
         {
-            OutputDebugStringAFormat("WM_KEYDOWN %d %c\n", (int)key, (char)key);
+            OutputDebugStringAFormat("WM_KEYDOWN %d %c\n", (int)Key, (char)Key);
         } break;
     }
 }
@@ -199,7 +215,7 @@ Win32WindowProc(HWND hwnd,
         
         case WM_KEYDOWN:
         {
-            win32KeyDownHandler(wParam);
+            win32KeyDownHandler(wParam, lParam);
         } break;
         
         case WM_KEYUP:
