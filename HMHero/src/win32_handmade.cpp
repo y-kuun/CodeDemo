@@ -86,64 +86,63 @@ Win32GetWindowDimension(HWND Window)
 }
 
 internal void
-RenderWeirdGradient(win32_offscreen_buffer Buffer, int BlueOffset, int GreenOffset)
+RenderWeirdGradient(win32_offscreen_buffer *Buffer, int BlueOffset, int GreenOffset)
 {
     // NOTE(ykdu) addition is the most cheapest operation fro 
-    uint8_t *Row = (uint8_t*)Buffer.Memory;
-    for(int Y = 0; Y < Buffer.Height; Y++)
+    uint8_t *Row = (uint8_t*)Buffer->Memory;
+    for(int Y = 0; Y < Buffer->Height; Y++)
     {
         uint32_t *Pixel = (uint32_t*)Row;
-        for(int X = 0; X < Buffer.Width; X++)
+        for(int X = 0; X < Buffer->Width; X++)
         {
             uint8_t Blue =  (X + BlueOffset);
             uint8_t Green = (Y + GreenOffset);
             *Pixel++ = ((Green << 8) | Blue);
         }
-        Row += Buffer.Pitch;
+        Row += Buffer->Pitch;
     }
 }
 
 internal void
-Win32ResizeDIBSection(win32_offscreen_buffer *pBuffer, int Width, int Height)
+Win32ResizeDIBSection(win32_offscreen_buffer *Buffer, int Width, int Height)
 {
-    if(pBuffer->Memory)
+    if(Buffer->Memory)
     {
-        VirtualFree(pBuffer->Memory, 0, MEM_RELEASE);
+        VirtualFree(Buffer->Memory, 0, MEM_RELEASE);
     }
 
-    pBuffer->Width = Width;
-    pBuffer->Height = Height;
+    Buffer->Width = Width;
+    Buffer->Height = Height;
 
-    pBuffer->Info.bmiHeader.biSize = sizeof(pBuffer->Info.bmiHeader);
-    pBuffer->Info.bmiHeader.biWidth = pBuffer->Width;
+    Buffer->Info.bmiHeader.biSize = sizeof(Buffer->Info.bmiHeader);
+    Buffer->Info.bmiHeader.biWidth = Buffer->Width;
     // NOTE(ykdu): plus bottom-top, minus for top-bottom
-    pBuffer->Info.bmiHeader.biHeight = -pBuffer->Height;
-    pBuffer->Info.bmiHeader.biPlanes = 1;
-    pBuffer->Info.bmiHeader.biBitCount = 32;
-    pBuffer->Info.bmiHeader.biCompression = BI_RGB;
+    Buffer->Info.bmiHeader.biHeight = -Buffer->Height;
+    Buffer->Info.bmiHeader.biPlanes = 1;
+    Buffer->Info.bmiHeader.biBitCount = 32;
+    Buffer->Info.bmiHeader.biCompression = BI_RGB;
 
     // TODO(ykdu) allocate array which is DWORD aligned might work
     int BytesPerPixel = sizeof(uint32_t);
     // NOTE(ykdu) alloc at page level
-    pBuffer->Memory = VirtualAlloc(0,
-        BytesPerPixel * pBuffer->Width * pBuffer->Height,
+    Buffer->Memory = VirtualAlloc(0,
+        BytesPerPixel * Buffer->Width * Buffer->Height,
         MEM_COMMIT, PAGE_READWRITE);
-    pBuffer->Pitch = BytesPerPixel * pBuffer->Width;
+    Buffer->Pitch = BytesPerPixel * Buffer->Width;
     
     // TODO(ykdu) should clear the memory to black(0)
 }
 
 internal void
-Win32DisplayBufferInWindow(HDC DeviceContext, int WindowWidth, int WindowHeight,
-    win32_offscreen_buffer Buffer)
+Win32DisplayBufferInWindow(win32_offscreen_buffer *Buffer, HDC DeviceContext, int WindowWidth, int WindowHeight)
 {
     // NOTE(ykdu): if dest rect is larger/smaller than src rect,
     // StretchDIBits will enlarge or compact the data
     StretchDIBits(DeviceContext,
         0, 0, WindowWidth, WindowHeight, // NOTE(ykdu) left-top x,y and width,height
-        0, 0, Buffer.Width, Buffer.Height,
-        Buffer.Memory,
-        &Buffer.Info,
+        0, 0, Buffer->Width, Buffer->Height,
+        Buffer->Memory,
+        &Buffer->Info,
         DIB_RGB_COLORS, SRCCOPY);
 }
 
@@ -151,6 +150,8 @@ void win32KeyDownHandler(WPARAM key)
 {
     // move with hjkl
     // TODO(ykdu): use marcro instead of intermediate numbers
+    // NOTE(ykdu): if you input two key at the same time, how ever only one VK message will be provoked,
+    // may be we should using key down to handle this multiple key inputed at the same time, otherwise `GetKeyboardState` `GetAsyncKeyState`
     switch(key)
     {
         case 0x4A: // j
@@ -189,6 +190,8 @@ Win32WindowProc(HWND hwnd,
     // wParam, lParam both depend on the value of uMsg
     LRESULT result = 0;
     switch(uMsg){
+
+        // NOTE(ykdu): when come to key message, lParam contains a bitmask for differen meannings, check to MSDN
         case WM_CHAR:
         {
             OutputDebugStringAFormat("WM_CHAR %d %c\n", (int)wParam, (char)wParam);            
@@ -234,7 +237,7 @@ Win32WindowProc(HWND hwnd,
             PAINTSTRUCT Paint;
             HDC DeviceContext = BeginPaint(hwnd, &Paint);
             win32_window_dimension Dim = Win32GetWindowDimension(hwnd);
-            Win32DisplayBufferInWindow(DeviceContext, Dim.Width, Dim.Height, GlobalBackbuffer);
+            Win32DisplayBufferInWindow(&GlobalBackbuffer, DeviceContext, Dim.Width, Dim.Height);
             EndPaint(hwnd, &Paint);
         } break;
 
@@ -341,9 +344,9 @@ WinMain(HINSTANCE hInstance,
                     }
                 }
                 
-                RenderWeirdGradient(GlobalBackbuffer, XOffset, YOffset);
+                RenderWeirdGradient(&GlobalBackbuffer, XOffset, YOffset);
                 win32_window_dimension Dim = Win32GetWindowDimension(WindowHandle);
-                Win32DisplayBufferInWindow(DeviceContext, Dim.Width, Dim.Height, GlobalBackbuffer);
+                Win32DisplayBufferInWindow(&GlobalBackbuffer, DeviceContext, Dim.Width, Dim.Height);
                 // ++XOffset;
                 // ++YOffset;
             }
