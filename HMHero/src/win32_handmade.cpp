@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include <xinput.h>
+#include <dsound.h>
 #include "handmade_hero_debug.h"
 
 // refer to MSDN at least one time
@@ -77,6 +78,90 @@ win32LoadXInput(void)
         XInputSetState = (x_input_set_state*)GetProcAddress(XInputLibrary, "XInputSetState");
         if(!XInputSetState) { XInputSetState = XInputSetStateStub;}
     }
+}
+
+#define DIRECT_SOUND_CREATE(name) _Check_return_ HRESULT WINAPI name(_In_opt_ LPCGUID pcGuidDevice, _Outptr_ LPDIRECTSOUND *ppDS, _Pre_null_ LPUNKNOWN pUnkOuter)
+typedef DIRECT_SOUND_CREATE(direct_sound_create);
+internal void
+win32InitDSound(HWND Window, int32_t SamplesPerSecond, int32_t BufferSize)
+{
+    // NOTE(ykdu): Load the library
+
+    // NOTE(ykdu): Get a DirectSound
+    HMODULE DSoundLibrary = LoadLibrary("dsound.dll");
+    if(DSoundLibrary)
+    {
+        direct_sound_create *DirectSoundCreate = (direct_sound_create*)GetProcAddress(DSoundLibrary, "DirectSoundCreate");
+        
+        LPDIRECTSOUND DirectSound;
+        if(DirectSoundCreate && SUCCEEDED(DirectSoundCreate(0, &DirectSound, 0)))
+        {
+            WAVEFORMATEX WaveFormat = {};
+            WaveFormat.nChannels = 2;
+            WaveFormat.wBitsPerSample = 16;
+            WaveFormat.cbSize = 0;
+            WaveFormat.wFormatTag = WAVE_FORMAT_PCM;                    
+            WaveFormat.nSamplesPerSec = SamplesPerSecond;
+                    
+            WaveFormat.nBlockAlign  = (WaveFormat.nChannels * WaveFormat.wBitsPerSample) / 8;
+            WaveFormat.nAvgBytesPerSec = WaveFormat.nSamplesPerSec * WaveFormat.nBlockAlign;
+
+            if(SUCCEEDED(DirectSound->SetCooperativeLevel(Window, DSSCL_PRIORITY)))
+            {
+                {
+                    DSBUFFERDESC BufferDescription = {};
+                    BufferDescription.dwSize = sizeof(BufferDescription);
+                    BufferDescription.dwFlags = DSBCAPS_PRIMARYBUFFER;
+                    // two second data for audio
+                    LPDIRECTSOUNDBUFFER PrimaryBuffer;
+                    if(SUCCEEDED(DirectSound->CreateSoundBuffer(&BufferDescription, &PrimaryBuffer, 0)))
+                    {
+                        if(SUCCEEDED(PrimaryBuffer->SetFormat(&WaveFormat)))
+                        {
+                            OutputDebugStringAFormat("DSound PrimaryBuffer Succeeded!\n");
+                        }
+                        else
+                        {
+                            // TODO(ykdu): Diagnostic
+                        }
+                    }
+                }
+
+                {
+                    // NOTE(ykdu): casey may have problems reading the MSDN, it seems to me hard to use
+                    DSBUFFERDESC BufferDescription = {};
+                    BufferDescription.dwSize = sizeof(BufferDescription);
+                    BufferDescription.dwFlags = 0;
+                    BufferDescription.dwBufferBytes = BufferSize;
+                    BufferDescription.lpwfxFormat = &WaveFormat;
+                    // two second data for audio
+                    LPDIRECTSOUNDBUFFER SecondaryBuffer;
+                    if(SUCCEEDED(DirectSound->CreateSoundBuffer(&BufferDescription, &SecondaryBuffer, 0)))
+                    {
+                        // TODO(ykdu): Play Sound
+                        OutputDebugStringAFormat("DSound SecondaryBuffer Succeeded!\n");                        
+                    }
+                    else
+                    {
+                        // TODO(ykdu): Diagnostic
+                    }
+                }
+            }
+            else
+            {
+                // TODO(ykdu): Diagnostic
+            }
+            // NOTE(ykdu): "Create" a primary/secondary buffer to comunicate with the sound card
+            // (sound card can also do sould shader, to create new effects)
+            OutputDebugStringAFormat("DSound Finished!\n");
+        }
+        else
+        {
+            // TODO(ykdu): Diagnostic
+            OutputDebugStringAFormat("Diagnostic DSound!\n");
+        }
+    }
+    return;
 }
 
 win32_window_dimension
@@ -312,6 +397,9 @@ WinMain(HINSTANCE hInstance,
         {
             HDC DeviceContext = GetDC(WindowHandle);
             GlobalRunning = true;
+
+            win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
+            
             while(GlobalRunning)
             {
                 MSG Message;
