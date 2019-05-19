@@ -19,8 +19,11 @@
 #define local_persist static
 #define global_variable static
 
+typedef uint32_t bool32_t;
+
 global_variable int XOffset = 0;
 global_variable int YOffset = 0;
+global_variable LPDIRECTSOUNDBUFFER GlobalSecondaryBuffer;
 
 // NOTE(ykdu) go throught the all code when you refactory
 typedef struct win32_offscreen_buffer
@@ -135,11 +138,10 @@ win32InitDSound(HWND Window, int32_t SamplesPerSecond, int32_t BufferSize)
                     BufferDescription.dwBufferBytes = BufferSize;
                     BufferDescription.lpwfxFormat = &WaveFormat;
                     // two second data for audio
-                    LPDIRECTSOUNDBUFFER SecondaryBuffer;
-                    if(SUCCEEDED(DirectSound->CreateSoundBuffer(&BufferDescription, &SecondaryBuffer, 0)))
+                    if(SUCCEEDED(DirectSound->CreateSoundBuffer(&BufferDescription, &GlobalSecondaryBuffer, 0)))
                     {
                         // TODO(ykdu): Play Sound
-                        OutputDebugStringAFormat("DSound SecondaryBuffer Succeeded!\n");                        
+                        OutputDebugStringAFormat("DSound GlobalSecondaryBuffer Succeeded!\n");                        
                     }
                     else
                     {
@@ -398,7 +400,19 @@ WinMain(HINSTANCE hInstance,
             HDC DeviceContext = GetDC(WindowHandle);
             GlobalRunning = true;
 
-            win32InitDSound(WindowHandle, 48000, 48000 * sizeof(int16_t) * 2);
+            // NOTE(ykdu): DirectSound Configurations
+            uint32_t RunningSampleIndex = 0;
+            int SamplesPerSecond = 48000;
+            int ToneHz = 2560;
+            int16_t ToneVolume = 3000;
+            int SquareWavePeriod = SamplesPerSecond / ToneHz;
+            int HalfSquareWavePeriod = SquareWavePeriod / 2;
+            int BytesPerSample = sizeof(int16_t) * 2;
+            int SecondaryBufferSize = SamplesPerSecond * BytesPerSample;
+            
+            win32InitDSound(WindowHandle, SamplesPerSecond, SecondaryBufferSize);
+            bool32_t SoundIsPlaying = false;
+            
             
             while(GlobalRunning)
             {
@@ -449,8 +463,61 @@ WinMain(HINSTANCE hInstance,
                 }
                 
                 RenderWeirdGradient(&GlobalBackbuffer, XOffset, YOffset);
+
+                DWORD PlayCursor, WriteCursor;
+                if(SUCCEEDED(GlobalSecondaryBuffer->GetCurrentPosition(&PlayCursor, &WriteCursor)))
+                {
+                    // NOTE(ykdu): DirectSound test here
+                    DWORD ByteToLock = RunningSampleIndex * BytesPerSample % SecondaryBufferSize;
+                    DWORD BytesToWrite = 0;
+                    if(ByteToLock == PlayCursor)
+                    {
+                        BytesToWrite = SecondaryBufferSize;
+                    }
+                    else if(ByteToLock > PlayCursor)
+                    {
+                        BytesToWrite = (SecondaryBufferSize - ByteToLock);
+                        BytesToWrite += PlayCursor;
+                    }
+                    else
+                    {
+                        BytesToWrite = PlayCursor - ByteToLock;
+                    }
+                    VOID *Region1, *Region2;
+                    DWORD Region1Size, Region2Size;
+                    if(SUCCEEDED(GlobalSecondaryBuffer->Lock(ByteToLock, BytesToWrite, &Region1, &Region1Size, &Region2, &Region2Size, 0)))
+                    {
+                        int16_t *SampleOut = (int16_t*)Region1;
+                        DWORD Region1SampleCount = Region1Size / BytesPerSample;
+                        DWORD SampleIndex = 0;
+                        for(SampleIndex = 0; SampleIndex < Region1SampleCount; SampleIndex++)
+                        {
+                            int16_t SampleValue = ((RunningSampleIndex++ / HalfSquareWavePeriod) % 2) ? ToneVolume : -ToneVolume;
+                            *SampleOut++ = SampleValue;
+                            *SampleOut++ = SampleValue;
+                        }
+                        
+                        SampleOut = (int16_t*)Region2;
+                        DWORD Region2SampleCount = Region2Size / BytesPerSample;
+                        for(SampleIndex = 0; SampleIndex < Region2SampleCount; SampleIndex++)
+                        {
+                            int16_t SampleValue = ((RunningSampleIndex++ / HalfSquareWavePeriod) % 2) ? ToneVolume : -ToneVolume;                            
+                            *SampleOut++ = SampleValue;
+                            *SampleOut++ = SampleValue;
+                        }
+                        GlobalSecondaryBuffer->Unlock(Region1, Region1Size, Region2, Region2Size);    
+                    }
+                }
+                if(!SoundIsPlaying)
+                {
+                    GlobalSecondaryBuffer->Play(0, 0, DSBPLAY_LOOPING);
+                    SoundIsPlaying = true;
+                }
+                
                 win32_window_dimension Dim = Win32GetWindowDimension(WindowHandle);
                 Win32DisplayBufferInWindow(&GlobalBackbuffer, DeviceContext, Dim.Width, Dim.Height);
+                
+                // NOTE(ykdu): casey writes the game pad control code here, which x yoffset can just be local varibale,
                 // ++XOffset;
                 // ++YOffset;
             }
