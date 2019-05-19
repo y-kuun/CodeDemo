@@ -184,7 +184,7 @@ void win32KeyDownHandler(WPARAM Key, LPARAM BitMask)
         case VK_F4:
         {
             // on windows 10 WM_CLOSE message will be provoked before this alt-f4
-            if(BitMask & (1 << 29))
+            if((BitMask & (1 << 29)) != 0)
             {
                 GlobalRunning = false;
             }
