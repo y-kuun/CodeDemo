@@ -19,8 +19,9 @@
 		- CPU相关的一个计数值， 不是进程相关的
 		- CPU的主频会变，实际上每一个时钟周期代码的真实时间不一致
 		- 多核同步问题
+		
    * [QueryPerformanceCounter](https://docs.microsoft.com/en-us/windows/desktop/api/profileapi/nf-profileapi-queryperformancecounter)
-	 * Win API, 用来处理高精度的时间需求
+	 * Win API, 用来处理高精度的时间需求 (<1us) 
   
   * [QueryPerformanceFrequency](https://docs.microsoft.com/en-us/windows/desktop/api/profileapi/nf-profileapi-queryperformancefrequency), performance counter的频率
 	 * 启动的时候被计算出来，在所有的processor中都是一个常量
@@ -38,6 +39,7 @@ int64_t PerfCountFrequency = PerfCountFrequencyResult.QuadPart;
 ```c++
 LARGE_INTEGER LastCounter;
 QueryPerformanceCounter(&LastCounter);
+// compiler-specific extension that allows direct invocation of some processor instruction. They generally need to be extensions to the compiler so they can avoid all the expensive niceties compilers have to afford functions.
 uint64_t LastCycleCount = __rdtsc();
 
 ```
@@ -66,15 +68,14 @@ LastCycleCount = EndCycleCount;
 
 ## 其他的计算方法
 
-* clock()
-* time()
-* __rdtsc()
-  - An intrinsic is a compiler-specific extension that allows direct invocation of some processor instruction. They generally need to be extensions to the compiler so they can avoid all the expensive niceties compilers have to afford functions.
-* QueryPerformanceCounter()
+* [clock()](https://en.cppreference.com/w/c/chrono/clock)（4ms）
+  * windows平台可能会使用 GetTickCount（15ms）
+* [time()](https://en.cppreference.com/w/c/chrono/time)
 
 ## references
 
 1. [Game Timing and Multicore Processors](https://docs.microsoft.com/en-us/windows/desktop/dxtecharts/game-timing-and-multicore-processors)
+2. [Acquiring high-resolution time stamps](https://docs.microsoft.com/en-us/windows/desktop/SysInfo/acquiring-high-resolution-time-stamps)
 
 
 
