@@ -435,6 +435,9 @@ WinMain(HINSTANCE hInstance,
 	LPSTR     lpCmdLine,
 	int       nShowCmd)
 {
+    LARGE_INTEGER PerfCountFrequencyResult;
+    QueryPerformanceFrequency(&PerfCountFrequencyResult);
+    int64_t PerfCountFrequency = PerfCountFrequencyResult.QuadPart;
     /*
       READ MSDN
       UINT      style;
@@ -485,6 +488,10 @@ WinMain(HINSTANCE hInstance,
             win32InitDSound(WindowHandle, GlobalSoundOutput.SamplesPerSecond, GlobalSoundOutput.SecondaryBufferSize);
             win32FillSoundBuffer(&GlobalSoundOutput, 0, GlobalSoundOutput.LatencySampleCount * GlobalSoundOutput.BytesPerSample);
             GlobalSecondaryBuffer->Play(0, 0, DSBPLAY_LOOPING);
+            
+            LARGE_INTEGER LastCounter;
+            QueryPerformanceCounter(&LastCounter);
+            uint64_t LastCycleCount = __rdtsc();
             
             while(GlobalRunning)
             {
@@ -564,6 +571,24 @@ WinMain(HINSTANCE hInstance,
                 // NOTE(ykdu): casey writes the game pad control code here, which x yoffset can just be local varibale,
                 ++XOffset;
                 // ++YOffset;
+
+                // UNION
+                uint64_t EndCycleCount = __rdtsc();
+                LARGE_INTEGER EndCounter;
+                QueryPerformanceCounter(&EndCounter);
+                
+                // TODO(casey): Display the value here
+                uint64_t CyclesElapsed = EndCycleCount - LastCycleCount;
+                int64_t CounterElapsed = EndCounter.QuadPart - LastCounter.QuadPart;
+                // micro second per frame, wall clock time
+                double MSPerFrame = (((1000.0f*(double)CounterElapsed) / (double)PerfCountFrequency));
+                double FPS = (double)PerfCountFrequency / (double)CounterElapsed;
+                // mega circles per frame
+                double MCPF = ((double)CyclesElapsed / (1000.0f * 1000.0f));
+                OutputDebugStringAFormat("%.02fms/f,  %.02ff/s,  %.02fmc/f\n", MSPerFrame, FPS, MCPF);
+
+                LastCounter = EndCounter;
+                LastCycleCount = EndCycleCount;
             }
         }
         else
