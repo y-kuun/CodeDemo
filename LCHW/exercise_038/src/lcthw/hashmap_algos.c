@@ -49,3 +49,25 @@ uint32_t Hashmap_djb_hash(void *data)
 
     return hash;
 }
+
+uint32_t default_hash(void *a)
+{
+    bstring data = (bstring)a;
+    size_t len = blength(data);
+    char *key = bdata(data);
+    uint32_t hash = 0;
+    uint32_t i = 0;
+
+    for(hash = i = 0; i < len; i++)
+    {
+        hash += key[i];
+        hash += (hash << 10);
+        hash ^= (hash >> 6);
+    }
+
+    hash += (hash << 3);
+    hash ^= (hash >> 11);
+    hash += (hash << 15);
+
+    return hash;
+}

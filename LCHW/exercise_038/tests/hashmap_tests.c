@@ -1,6 +1,7 @@
 #include "minunit.h"
 #include <assert.h>
 #include <lcthw/hashmap.h>
+#include <lcthw/hashmap_algos.h>
 #include <lcthw/bstrlib.h>
 
 Hashmap *map = NULL;
@@ -36,7 +37,7 @@ static int traverse_fail_cb(HashmapNode *node)
 
 char *test_create()
 {
-    map = Hashmap_create(NULL, NULL);
+    map = Hashmap_create(NULL, Hashmap_fnv1a_hash);
     mu_assert(map != NULL, "Failed to create map.");
 
     return NULL;

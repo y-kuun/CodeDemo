@@ -1,32 +1,11 @@
 #include <lcthw/hashmap.h>
+#include <lcthw/hashmap_algos.h>
 #include <lcthw/dbg.h>
 #include <lcthw/bstrlib.h>
 
 static int default_compare(void *a, void *b)
 {
     return bstrcmp((bstring)a, (bstring)b);
-}
-
-static uint32_t default_hash(void *a)
-{
-    bstring data = (bstring)a;
-    size_t len = blength(data);
-    char *key = bdata(data);
-    uint32_t hash = 0;
-    uint32_t i = 0;
-
-    for(hash = i = 0; i < len; i++)
-    {
-        hash += key[i];
-        hash += (hash << 10);
-        hash ^= (hash >> 6);
-    }
-
-    hash += (hash << 3);
-    hash ^= (hash >> 11);
-    hash += (hash << 15);
-
-    return hash;
 }
 
 Hashmap *Hashmap_create(Hashmap_compare compare, Hashmap_hash hash)
