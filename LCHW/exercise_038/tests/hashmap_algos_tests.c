@@ -121,14 +121,12 @@ char *test_distribution()
     for(i = 0; i < BUCKETS; i++)
     {
         fprintf(stderr, "%d\t%d\t%d\n",
-                stats[ALGO_FNV1A][1],
-                stats[ALGO_ADLER32][1],
-                stats[ALGO_DJB][1]);
+                stats[ALGO_FNV1A][i],
+                stats[ALGO_ADLER32][i],
+                stats[ALGO_DJB][i]);
     }
-    fprintf(stderr, "FNV\tA32\tDJB\n");
     
     destroy_keys(keys);
-
     return NULL;
 }
 
