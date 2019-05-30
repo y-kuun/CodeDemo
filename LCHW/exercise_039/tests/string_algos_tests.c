@@ -3,6 +3,7 @@
 #include <lcthw/bstrlib.h>
 #include <time.h>
 
+// random generated string
 struct tagbstring IN_STR = bsStatic("I have ALPHA beta ALPHA and oranges ALPHA");
 struct tagbstring ALPHA = bsStatic("ALPHA");
 const int TEST_TIME = 1;
@@ -65,6 +66,7 @@ char *test_find_performance()
     do {
         for(i = 0; i < 1000; i++)
         {
+            // StringScanner create stuff inside
             found_at = String_find(&IN_STR, &ALPHA);
             find_count++;
         }
@@ -82,9 +84,9 @@ char *test_scan_performance()
     int found_at = 0;
     unsigned long find_count = 0;
     time_t elapsed = 0;
-    StringScanner *scan = StringScanner_create(&IN_STR);
     time_t start = time(NULL);
-
+    StringScanner *scan = NULL;
+    scan = StringScanner_create(&IN_STR);
     do {
         for(i = 0; i < 1000; i++)
         {
