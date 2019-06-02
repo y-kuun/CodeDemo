@@ -1,0 +1,1678 @@
+DEBUG tests/bstree_tests.c:171: ----- RUNNING: ./build/bstree_tests
+DEBUG tests/bstree_tests.c:161: 
+----- test_create
+DEBUG tests/bstree_tests.c:162: 
+----- test_get_set
+DEBUG tests/bstree_tests.c:163: 
+----- test_traverse
+DEBUG tests/bstree_tests.c:20: KEY: test data 3
+DEBUG tests/bstree_tests.c:20: KEY: test data 2
+DEBUG tests/bstree_tests.c:20: KEY: test data 1
+DEBUG tests/bstree_tests.c:20: KEY: test data 3
+DEBUG tests/bstree_tests.c:20: KEY: test data 2
+DEBUG tests/bstree_tests.c:20: KEY: test data 1
+DEBUG tests/bstree_tests.c:27: KEY: test data 3
+DEBUG tests/bstree_tests.c:27: KEY: test data 2
+DEBUG tests/bstree_tests.c:164: 
+----- test_delete
+DEBUG tests/bstree_tests.c:165: 
+----- test_destroy
+DEBUG tests/bstree_tests.c:166: 
+----- test_fuzzing
+
+=================================================================
+==4778==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4ed631 in BSTree_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:15:19
+    #2 0x4eccf3 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:122:21
+    #3 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #4 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #5 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 1800 byte(s) in 100 object(s) allocated from:
+    #0 0x4b95a8 in __interceptor_malloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b95a8)
+    #1 0x4f00e7 in bfromcstrrangealloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:253:46
+    #2 0x4f01fd in bfromcstralloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:273:9
+    #3 0x50e9a9 in bformat /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:3055:22
+    #4 0x4ecd85 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:131:22
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 1782 byte(s) in 99 object(s) allocated from:
+    #0 0x4b95a8 in __interceptor_malloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b95a8)
+    #1 0x4f00e7 in bfromcstrrangealloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:253:46
+    #2 0x4f01fd in bfromcstralloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:273:9
+    #3 0x50e9a9 in bformat /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:3055:22
+    #4 0x4ecddb in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:132:19
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 1600 byte(s) in 100 object(s) allocated from:
+    #0 0x4b95a8 in __interceptor_malloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b95a8)
+    #1 0x4f0012 in bfromcstrrangealloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:249:16
+    #2 0x4f01fd in bfromcstralloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:273:9
+    #3 0x50e9a9 in bformat /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:3055:22
+    #4 0x4ecd85 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:131:22
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 1584 byte(s) in 99 object(s) allocated from:
+    #0 0x4b95a8 in __interceptor_malloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b95a8)
+    #1 0x4f0012 in bfromcstrrangealloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:249:16
+    #2 0x4f01fd in bfromcstralloc /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:273:9
+    #3 0x50e9a9 in bformat /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstrlib.c:3055:22
+    #4 0x4ecddb in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:132:19
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #14 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #15 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #16 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #17 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #18 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #14 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #15 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #16 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #17 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #18 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #14 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #15 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #16 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #17 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #18 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #13 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #14 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #15 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #16 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #17 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #18 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #12 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #13 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #14 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #15 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #16 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #11 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #12 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #13 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #14 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #15 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #9 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #10 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #11 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #12 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #13 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #14 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #5 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #6 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #7 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #8 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #5 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #6 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #7 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #8 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #8 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #9 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #10 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #11 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #10 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #11 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #12 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #13 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #9 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #10 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #11 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #12 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #7 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #14 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #15 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #16 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #17 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #18 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #19 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #5 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #6 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #7 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #8 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #4 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #7 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #8 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #9 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #10 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #4 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #5 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #6 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #7 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #8 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #9 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #5 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #6 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #7 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #8 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ee0db in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:77:27
+    #3 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #4 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #5 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #6 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #7 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4ed9ce in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:86:21
+    #3 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #4 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #5 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #6 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x4b9780 in calloc (/home/ykdu/extra/workspace/GitRepo/CodeDemo/LCHW/exercise_040/build/bstree_tests+0x4b9780)
+    #1 0x4edc60 in BSTreeNode_create /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:43:24
+    #2 0x4edfff in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:66:26
+    #3 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #4 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #5 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #6 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #7 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #8 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #9 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #10 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #11 0x4edfe9 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:62:13
+    #12 0x4ee0c5 in BSTree_setnode /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:73:13
+    #13 0x4edc05 in BSTree_set /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/src/lcthw/bstree.c:91:9
+    #14 0x4eceb0 in test_fuzzing /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:133:9
+    #15 0x4ed3a3 in all_tests /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:166:5
+    #16 0x4ed50d in main /home/ykdu/gitrepo/CodeDemo/LCHW/exercise_040/tests/bstree_tests.c:171:1
+    #17 0x7f60fc0512e0 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x202e0)
+
+SUMMARY: AddressSanitizer: 10790 byte(s) leaked in 499 allocation(s).
