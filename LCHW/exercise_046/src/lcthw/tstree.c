@@ -22,7 +22,7 @@ static inline TSTree *TSTree_insert_base(TSTree *root, TSTree *node,
     {
         node->low = TSTree_insert_base(root, node->low, key, len, value);
     }
-    else if(*key < node->splitchar)
+    else if(*key ==  node->splitchar)
     {
         if(len > 1)
         {
@@ -117,7 +117,7 @@ void *TSTree_search_prefix(TSTree *root, const char *key, size_t len)
     return node ? node->value : NULL;
 }
 
-void TSTree_treaverse(TSTree *node, TSTree_traverse_cb cb, void *data)
+void TSTree_traverse(TSTree *node, TSTree_traverse_cb cb, void *data)
 {
     if(!node) return;
 

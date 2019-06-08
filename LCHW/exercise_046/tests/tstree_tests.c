@@ -45,3 +45,61 @@ char *test_search_exact()
 
     return NULL;
 }
+
+char *test_search_prefix()
+{
+    void *res = TSTree_search_prefix(node, bdata(&test1), blength(&test1));
+    debug("result: %p. expected: %p", res, valueA);
+    mu_assert(res == valueA, "Got wrong valueA by prefix");
+    
+    res = TSTree_search_prefix(node, bdata(&test1), 1);
+    debug("result: %p. expected: %p", res, valueA);
+    mu_assert(res == value4, "Got wrong value4 by prefix of 1.");
+
+    res = TSTree_search_prefix(node, "TE", strlen("TE"));
+    mu_assert(res != NULL, "sould find for short prefix.");
+
+    res = TSTree_search_prefix(node, "TE--", strlen("TE--"));
+    mu_assert(res != NULL, "sould find for partial prefix.");
+
+    return NULL;
+}
+
+void TSTree_traverse_test_cb(void *value, void *data)
+{
+    assert(value != NULL && "should not get NULL value.");
+    assert(data == valueA && "Expecting valueA as the data..");
+    traverse_count++;
+}
+
+char *test_traverse()
+{
+    traverse_count = 0;
+    TSTree_traverse(node, TSTree_traverse_test_cb, valueA);
+    debug("traverse count is: %d", traverse_count);
+    mu_assert(traverse_count == 4, "Din't find 4 keys");
+
+    return NULL;
+}
+
+char *test_destroy()
+{
+    TSTree_destroy(node);
+
+    return NULL;
+}
+
+char *all_tests()
+{
+    mu_suite_start();
+
+    mu_run_test(test_insert);
+    mu_run_test(test_search_exact);
+    mu_run_test(test_search_prefix);
+    mu_run_test(test_traverse);        
+    mu_run_test(test_destroy);
+
+    return NULL;
+}
+
+RUN_TESTS(all_tests);
