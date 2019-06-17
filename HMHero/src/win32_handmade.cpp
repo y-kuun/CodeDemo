@@ -5,20 +5,31 @@
 #include <math.h>
 #include "handmade_hero_debug.h"
 
-// refer to MSDN at least one time
 /*
-  LRESULT CALLBACK WindowProc(
-  _In_ HWND   hwnd,
-  _In_ UINT   uMsg,
-  _In_ WPARAM wParam,
-  _In_ LPARAM lParam
-  );
+  TODO(ykdu): THIS IS NOT A FINAL P;ATFORM LAYER!!!!
+
+  * Saved game locations
+  * Getting a handle to our own execitable file
+  * Asset loading path
+  * Threading (launch a thread)
+  * Raw Input (support for multiple keyboards
+  * sleep / time begin period
+  * clip Cursor
+  * Fullscreen support
+  * WM_SETCURSOR control cursor visibility
+  * QueryCancelAutoplay
+  * WM_ACTIVATEAPP
+  * Blit speed improvements
+  * Hardware acceleration
+  * GetKeyboardLayout
+
+Just a partial list of stuff  !!!
 */
 
 // NOTE(ykdu) more reasonable name for static
 #define internal static
 #define local_persist static
-#define global_variable static
+#define global_variable static 
 
 #define Pi32 3.14159265359f
 
@@ -28,9 +39,18 @@ global_variable int XOffset = 0;
 global_variable int YOffset = 0;
 global_variable LPDIRECTSOUNDBUFFER GlobalSecondaryBuffer;
 
+// unity builds, compile as one single translation
+#include "handmade.cpp"
+
+void *PlatformLoadFile(char *FileName)
+{
+    return NULL;
+}
+
 // NOTE(ykdu) go throught the all code when you refactory
 typedef struct win32_offscreen_buffer
 {
+
     BITMAPINFO Info;
     void *Memory;
     int Width;
@@ -62,10 +82,6 @@ global_variable BOOL GlobalRunning;
 // NOTE(ykdu): we keep only one back buff all the time
 global_variable win32_offscreen_buffer GlobalBackbuffer;
 global_variable win32_sound_output GlobalSoundOutput = {};
-
-
-
-// NOTE(ykdu):
 
 #define X_INPUT_SET_STATE(name) DWORD WINAPI name(DWORD, XINPUT_VIBRATION*)
 typedef X_INPUT_SET_STATE(x_input_set_state);
@@ -201,24 +217,6 @@ Win32GetWindowDimension(HWND Window)
     Result.Height = ClientRect.bottom - ClientRect.top;
     
     return(Result);
-}
-
-internal void
-RenderWeirdGradient(win32_offscreen_buffer *Buffer, int BlueOffset, int GreenOffset)
-{
-    // NOTE(ykdu) addition is the most cheapest operation fro 
-    uint8_t *Row = (uint8_t*)Buffer->Memory;
-    for(int Y = 0; Y < Buffer->Height; Y++)
-    {
-        uint32_t *Pixel = (uint32_t*)Row;
-        for(int X = 0; X < Buffer->Width; X++)
-        {
-            uint8_t Blue =  (X + BlueOffset);
-            uint8_t Green = (Y + GreenOffset);
-            *Pixel++ = ((Green << 8) | Blue);
-        }
-        Row += Buffer->Pitch;
-    }
 }
 
 internal void
@@ -540,8 +538,14 @@ WinMain(HINSTANCE hInstance,
                         // NOTE(ykdu); controller is not available
                     }
                 }
-                
-                RenderWeirdGradient(&GlobalBackbuffer, XOffset, YOffset);
+
+                game_offscreen_buffer Buffer = {};
+                Buffer.Memory = GlobalBackbuffer.Memory;
+                Buffer.Width = GlobalBackbuffer.Width;
+                Buffer.Height = GlobalBackbuffer.Height;
+                Buffer.Pitch = GlobalBackbuffer.Pitch;
+                GameUpdateAndRender(&Buffer);
+                // RenderWeirdGradient(&GlobalBackbuffer, XOffset, YOffset);
 
                 DWORD PlayCursor, WriteCursor;
                 if(SUCCEEDED(GlobalSecondaryBuffer->GetCurrentPosition(&PlayCursor, &WriteCursor)))
@@ -572,20 +576,19 @@ WinMain(HINSTANCE hInstance,
                 ++XOffset;
                 // ++YOffset;
 
-                // UNION
                 uint64_t EndCycleCount = __rdtsc();
                 LARGE_INTEGER EndCounter;
                 QueryPerformanceCounter(&EndCounter);
                 
-                // TODO(casey): Display the value here
                 uint64_t CyclesElapsed = EndCycleCount - LastCycleCount;
                 int64_t CounterElapsed = EndCounter.QuadPart - LastCounter.QuadPart;
-                // micro second per frame, wall clock time
                 double MSPerFrame = (((1000.0f*(double)CounterElapsed) / (double)PerfCountFrequency));
                 double FPS = (double)PerfCountFrequency / (double)CounterElapsed;
-                // mega circles per frame
                 double MCPF = ((double)CyclesElapsed / (1000.0f * 1000.0f));
+
+#if 0
                 OutputDebugStringAFormat("%.02fms/f,  %.02ff/s,  %.02fmc/f\n", MSPerFrame, FPS, MCPF);
+#endif
 
                 LastCounter = EndCounter;
                 LastCycleCount = EndCycleCount;
