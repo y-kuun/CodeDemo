@@ -535,7 +535,7 @@ WinMain(HINSTANCE hInstance,
                         }
                         else
                         {
-                            Y = (float)Pad->sThumbLY / 32767.0f;
+                            Y = (float)Pad->sThumbY / 32767.0f;
                         }
                         NewController->MinY = NewController->MaxY = NewController->EndY = Y;
                         Win32ProcessXInputDigitalButton(Pad->wButtons,
