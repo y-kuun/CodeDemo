@@ -310,67 +310,6 @@ Win32DisplayBufferInWindow(win32_offscreen_buffer *Buffer, HDC DeviceContext, in
         DIB_RGB_COLORS, SRCCOPY);
 }
 
-
-void win32KeyDownHandler(WPARAM Key, LPARAM BitMask)
-{
-    #if 0
-    // move with hjkl
-    // TODO(ykdu): use marcro instead of intermediate numbers
-    // NOTE(ykdu): if you input two key at the same time, how ever only one VK message will be provoked,
-    // may be we should using key down to handle this multiple key inputed at the same time, otherwise `GetKeyboardState` `GetAsyncKeyState`
-    switch(Key)
-    {
-        case 0x4A: // j
-        {
-            YOffset -= 10;
-        } break;
-
-        case 0x4B: // k
-        {
-            YOffset += 10;
-        } break;
-
-        case 0x48: // h
-        {
-            XOffset += 10;
-        } break;
-
-        case 0x4C: // l
-        {
-            XOffset -= 10;
-        } break;
-
-        case VK_F4:
-        {
-            // on windows 10 WM_CLOSE message will be provoked before this alt-f4
-            if((BitMask & (1 << 29)) != 0)
-            {
-                GlobalRunning = false;
-            }
-        } break;
-
-        case VK_UP:
-        {
-            // this canbe overflow
-            GlobalSoundOutput.ToneHz *= 1.1f;
-            GlobalSoundOutput.WavePeriod = GlobalSoundOutput.SamplesPerSecond / GlobalSoundOutput.ToneHz;
-        } break;
-
-        case VK_DOWN:
-        {
-            // NOTE(ykdu): this will be 0.000, after serveral times, however the next line will raise exception
-            GlobalSoundOutput.ToneHz /= 1.1f;
-            GlobalSoundOutput.WavePeriod = GlobalSoundOutput.SamplesPerSecond / GlobalSoundOutput.ToneHz;
-        } break;
-
-        default:
-        {
-            OutputDebugStringAFormat("WM_KEYDOWN %d %c\n", (int)Key, (char)Key);
-        } break;
-    }
-    #endif
-}
-
 LRESULT CALLBACK
 Win32WindowProc(HWND hwnd,
 	   UINT uMsg,
@@ -389,11 +328,11 @@ Win32WindowProc(HWND hwnd,
 
         case WM_KEYDOWN:
         {
-            win32KeyDownHandler(wParam, lParam);
         } break;
 
         case WM_KEYUP:
         {
+            Assert(!"Keyboard input came in through a non-dispatch message!");
             OutputDebugStringAFormat("WM_KEYUP %d %c\n", (int)wParam, (char)wParam);
         } break;
 
@@ -438,7 +377,6 @@ Win32WindowProc(HWND hwnd,
             result = DefWindowProc(hwnd, uMsg, wParam, lParam);
         } break;
     }
-
     return result;
 }
 
@@ -497,12 +435,102 @@ Win32FillSoundBuffer(win32_sound_output *SoundOutput, DWORD ByteToLock, DWORD By
 }
 
 internal void
+Win32ProcessKeyboardMessage(game_button_state *NewState, bool IsDown)
+{
+    NewState->EndedDown = IsDown;
+    ++NewState->HalfTransitionCount;
+}
+
+internal void
 Win32ProcessXInputDigitalButton(DWORD XInputButtonState,
                                 game_button_state *OldState, DWORD ButtonBit,
                                 game_button_state *NewState)
 {
-    NewState->EndedDown = ((XInputButtonState & ButtonBit) == ButtonBit);
-    NewState->HalfTransitionCount = (OldState->EndedDown != NewState->EndedDown) ? 1 : 0;
+    NewState->EndedDown |= ((XInputButtonState & ButtonBit) == ButtonBit);
+    NewState->HalfTransitionCount |= (OldState->EndedDown != NewState->EndedDown) ? 1 : 0;
+}
+
+internal void
+Win32ProcessPendingMessages(game_controller_input *KeyboardController)
+{
+    MSG Message;
+    while(PeekMessage(&Message, 0, 0, 0, PM_REMOVE))
+    {
+        switch(Message.message)
+        {
+            case WM_QUIT:
+            {
+                GlobalRunning = false;
+            } break;
+            case WM_SYSKEYDOWN:
+            case WM_SYSKEYUP:
+            case WM_KEYDOWN:
+            case WM_KEYUP:
+            {
+                uint32_t VKCode = (uint32_t)Message.wParam;
+                bool WasDown = ((Message.lParam & (1 << 30)) != 0);
+                bool IsDown = ((Message.lParam & (1 << 31)) == 0);
+                if(WasDown != IsDown)
+                {
+                    if(VKCode == 'W')
+                    {
+                    }
+                    else if(VKCode == 'A')
+                    {
+                    }
+                    else if(VKCode == 'S')
+                    {
+                    }
+                    else if(VKCode == 'D')
+                    {
+                    }
+                    else if(VKCode == 'Q')
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->LeftShoulder, IsDown);
+                    }
+                    else if(VKCode == 'E')
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->RightShoulder, IsDown);
+                    }
+                    else if(VKCode == VK_UP)
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->Up, IsDown);
+                    }
+                    else if(VKCode == VK_LEFT)
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->Left, IsDown);
+                    }
+                    else if(VKCode == VK_DOWN)
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->Down, IsDown);
+                    }
+                    else if(VKCode == VK_RIGHT)
+                    {
+                        Win32ProcessKeyboardMessage(&KeyboardController->Right, IsDown);
+                    }
+                    else if(VKCode == VK_ESCAPE)
+                    {
+                        GlobalRunning = false;
+                    }
+                    else if(VKCode == VK_SPACE)
+                    {
+                    }
+                }
+
+                bool AltKeyWasDown = (Message.lParam & (1 << 29));
+                if((VKCode == VK_F4) && AltKeyWasDown)
+                {
+                    GlobalRunning = false;
+                }
+            } break;
+
+            default:
+            {
+                TranslateMessage(&Message);
+                DispatchMessageA(&Message);
+            }
+        }
+    }
 }
 
 int CALLBACK
@@ -554,11 +582,11 @@ WinMain(HINSTANCE hInstance,
             LPVOID BaseAddress = 0;
 #endif
             game_memory GameMemory = {};
-            GameMemory.PermanetStorageSize = Megabytes(64);
-            GameMemory.TransientStorageSize = Gigabytes(4);
+            GameMemory.PermanetStorageSize = Megabytes(4);
+            GameMemory.TransientStorageSize = Gigabytes(1);
 
             uint64_t TotalSize = GameMemory.PermanetStorageSize + GameMemory.TransientStorageSize;
-            GameMemory.PermanetStorage = VirtualAlloc(BaseAddress, TotalSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+            GameMemory.PermanetStorage = VirtualAlloc(BaseAddress, (size_t)TotalSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
             GameMemory.TransientStorage = ((uint8_t*)GameMemory.PermanetStorage + GameMemory.PermanetStorageSize);
 
             // nesseccey memory already inited
@@ -574,23 +602,18 @@ WinMain(HINSTANCE hInstance,
 
                 while(GlobalRunning)
                 {
-                    MSG Message;
-                    while(PeekMessage(&Message, 0, 0, 0, PM_REMOVE))
-                    {
-                        if(Message.message == WM_QUIT)
-                        {
-                            GlobalRunning = false;
-                        }
-                        TranslateMessage(&Message);
-                        DispatchMessageA(&Message);
-                    }
 
-                    int MaxControllerCount = XUSER_MAX_COUNT;
+                    game_controller_input *KeyboardController = &NewInput->Controllers[0];
+                    game_controller_input ZeroController = {};
+
+                    Win32ProcessPendingMessages(KeyboardController);
+
+                    DWORD MaxControllerCount = XUSER_MAX_COUNT;
                     if(MaxControllerCount > ArrayCount(NewInput->Controllers))
                     {
                         MaxControllerCount = ArrayCount(NewInput->Controllers);
                     }
-                    for(DWORD ControllerIndex=0; ControllerIndex < XUSER_MAX_COUNT; ControllerIndex++)
+                    for(DWORD ControllerIndex=0; ControllerIndex > XUSER_MAX_COUNT; ControllerIndex++)
                     {
                         game_controller_input *OldController = &OldInput->Controllers[ControllerIndex];
                         game_controller_input *NewController = &NewInput->Controllers[ControllerIndex];                    
@@ -718,10 +741,11 @@ WinMain(HINSTANCE hInstance,
 
                     LastCounter = EndCounter;
                     LastCycleCount = EndCycleCount;
-
+#if 0
                     game_input *Temp = NewInput;
                     NewInput = OldInput;
                     OldInput = Temp;
+#endif
 
                  }
             }

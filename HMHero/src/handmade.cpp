@@ -31,8 +31,8 @@ RenderWeirdGradient(game_offscreen_buffer *Buffer, int BlueOffset, int GreenOffs
         uint32_t *Pixel = (uint32_t*)Row;
         for(int X = 0; X < Buffer->Width; X++)
         {
-            uint8_t Blue =  (X + BlueOffset);
-            uint8_t Green = (Y + GreenOffset);
+            uint8_t Blue = (uint8_t)(X + BlueOffset);
+            uint8_t Green = (uint8_t)(Y + GreenOffset);
             *Pixel++ = ((Green << 8) | Blue);
         }
         Row += Buffer->Pitch;
@@ -65,7 +65,7 @@ GameUpdateAndRender(game_memory *Memory, game_input *Input, game_offscreen_buffe
     game_controller_input *Input0 = &Input->Controllers[0];
     if(Input0->IsAnalog)
     {
-        GameState->BlueOffset += (int)4.0f * (Input0->EndX);
+        GameState->BlueOffset += (int)(4.0f * (Input0->EndX));
         GameState->ToneHz = 256 + (int)(128.0f * (Input0->EndY));
     }
     else
@@ -75,7 +75,27 @@ GameUpdateAndRender(game_memory *Memory, game_input *Input, game_offscreen_buffe
 
     if(Input0->Down.EndedDown)
     {
-        GameState->GreenOffset += 1;
+        GameState->ToneHz = (GameState->ToneHz - 1);
+        if(GameState->ToneHz < 128)
+        {
+            GameState->ToneHz = 128;
+        }
+    }
+    if(Input0->Up.EndedDown)
+    {
+        GameState->ToneHz = (GameState->ToneHz + 1);
+        if(GameState->ToneHz > 256 + 128)
+        {
+            GameState->ToneHz = 256 + 128;
+        }
+    }
+    if(Input0->Left.EndedDown)
+    {
+        GameState->BlueOffset += 1;
+    }
+    if(Input0->Right.EndedDown)
+    {
+        GameState->BlueOffset -= 1;
     }
     
     GameOutputSound(SoundBuffer, GameState->ToneHz);
