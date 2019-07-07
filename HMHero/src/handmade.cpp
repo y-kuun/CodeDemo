@@ -20,7 +20,7 @@ GameOutputSound(game_sound_output_buffer *SoundBuffer, int ToneHz)
         tSine += 2.0f*Pi32*1.0f/(float)WavePeriod;
     }
 }
-    
+
 
 internal void
 RenderWeirdGradient(game_offscreen_buffer *Buffer, int BlueOffset, int GreenOffset)
@@ -43,6 +43,8 @@ internal void
 GameUpdateAndRender(game_memory *Memory, game_input *Input, game_offscreen_buffer *Buffer,
                     game_sound_output_buffer *SoundBuffer)
 {
+    Assert((&Input->Controllers[0].Terminator - &Input->Controllers[0].Buttons[0]) ==
+           (ArrayCount(Input->Controllers[0].Buttons)));
     Assert(sizeof(game_state) <= Memory->PermanetStorageSize);
 
     game_state *GameState = (game_state*) Memory->PermanetStorage;
@@ -57,45 +59,47 @@ GameUpdateAndRender(game_memory *Memory, game_input *Input, game_offscreen_buffe
             DEBUGPlatformFreeFileMemory(File.Contents);
         }
 
-        
+
         GameState->ToneHz = 256;
         Memory->IsInitialized = true;
     }
 
-    game_controller_input *Input0 = &Input->Controllers[0];
-    if(Input0->IsAnalog)
+    for(int ControllerIndex = 0; ControllerIndex < ArrayCount(Input->Controllers); ++ControllerIndex)
     {
-        GameState->BlueOffset += (int)(4.0f * (Input0->EndX));
-        GameState->ToneHz = 256 + (int)(128.0f * (Input0->EndY));
-    }
-    else
-    {
-        // NOTE(ykdu): Use digital movement tuning
-    }
-
-    if(Input0->Down.EndedDown)
-    {
-        GameState->ToneHz = (GameState->ToneHz - 1);
-        if(GameState->ToneHz < 128)
+        game_controller_input *Controller = GetController(Input, ControllerIndex);
+        if(Controller->IsAnalog)
         {
-            GameState->ToneHz = 128;
+            // NOTE(casey): Use analog movement tuning
+            GameState->BlueOffset += (int)(4.0f*Controller->StickAverageX);
+            GameState->ToneHz = 256 + (int)(128.0f*Controller->StickAverageY);
         }
-    }
-    if(Input0->Up.EndedDown)
-    {
-        GameState->ToneHz = (GameState->ToneHz + 1);
-        if(GameState->ToneHz > 256 + 128)
+        else
         {
-            GameState->ToneHz = 256 + 128;
+            if(Controller->MoveDown.EndedDown)
+            {
+                GameState->ToneHz = (GameState->ToneHz - 1);
+                if(GameState->ToneHz < 128)
+                {
+                    GameState->ToneHz = 128;
+                }
+            }
+            if(Controller->MoveUp.EndedDown)
+            {
+                GameState->ToneHz = (GameState->ToneHz + 1);
+                if(GameState->ToneHz > 256 + 128)
+                {
+                    GameState->ToneHz = 256 + 128;
+                }
+            }
+            if(Controller->MoveLeft.EndedDown)
+            {
+                GameState->BlueOffset += 1;
+            }
+            if(Controller->MoveRight.EndedDown)
+            {
+                GameState->BlueOffset -= 1;
+            }
         }
-    }
-    if(Input0->Left.EndedDown)
-    {
-        GameState->BlueOffset += 1;
-    }
-    if(Input0->Right.EndedDown)
-    {
-        GameState->BlueOffset -= 1;
     }
     
     GameOutputSound(SoundBuffer, GameState->ToneHz);
