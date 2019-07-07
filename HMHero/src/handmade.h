@@ -1,23 +1,26 @@
 #ifndef __HANDMADE_H__
 
-// game as service to the OS level
-/*
-  OS level ->
-  what to draw on the screen
-  what to play on the sound device
-  here is the user input
-  
-  read & write file
- */
 
 /*
-  TODO(ykdu):  Services that the platform layer provides to the game
+  HANDMADE_INTERNAL:
+  0 - Build for public release
+  1 - Build for developer only
+
+  HANDMADE_SLOW:
+  0 - Not slow code allowed
+  1 - Slow code welcome
  */
 
-/*
-  NOTE(ykdu): Services that the game provides to the platform layer
-  (this may expand in the futur - sound on separete thread, etc.)
-*/
+#if HANDMADE_SLOW
+#define Assert(Expression) if(!(Expression)) {*(int*)0 = 0;}
+#else
+#define Assert(Expression)
+#endif
+
+#define Kilobytes(Value) ((Value) * 1024LL)
+#define Megabytes(Value) (Kilobytes(Value) * 1024LL)
+#define Gigabytes(Value) (Megabytes(Value) * 1024LL)
+#define Terabytes(Value) (Gigabytes(Value) * 1024LL)
 
 // FOUR THINGS: timing, controller/ keyboard input, bitmap to use, sound buffer to use
 
@@ -80,8 +83,25 @@ typedef struct game_input
 {
     game_controller_input Controllers[4];
 } game_input;
+
+typedef struct game_memory
+{
+    bool IsInitialized;
+    uint64_t PermanetStorageSize;
+    void *PermanetStorage;
+
+    uint64_t TransientStorageSize;
+    void *TransientStorage;
+} game_memory;
+
+typedef struct game_state
+{
+    int ToneHz;
+    int GreenOffset;
+    int BlueOffset;
+} game_state;
     
-internal void GameUpdateAndRender(game_input *Input, game_offscreen_buffer *Buffer,
+internal void GameUpdateAndRender(game_memory *Memory, game_input *Input, game_offscreen_buffer *Buffer,
                                   game_sound_output_buffer *SoundBuffer);
 
 #define __HANDMADE_H__
