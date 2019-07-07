@@ -7,6 +7,7 @@ typedef struct win32_offscreen_buffer
     int Width;
     int Height;
     int Pitch;
+    int BytesPerPixel;
 } win32_offscreen_buffer;
 
 typedef struct win32_window_dimension
@@ -19,11 +20,17 @@ typedef struct win32_sound_output
 {
     int SamplesPerSecond;
     int BytesPerSample;
-    int SecondaryBufferSize;
+    DWORD SecondaryBufferSize;
     int LatencySampleCount;
     uint32_t RunningSampleIndex;
     float tSine;
 } win32_sound_output;
+
+typedef struct win32_debug_time_marker
+{
+    DWORD PlayCursor;
+    DWORD WriteCursor;
+} win32_debug_time_marker;
 
 #define __WIN32_HANDEMADE_H__
 #endif
