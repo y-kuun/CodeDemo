@@ -646,7 +646,7 @@ Win32DebugSyncDisplay(win32_offscreen_buffer *Backbuffer,
         DWORD PlayColor = 0xFFFFFFFF;
         DWORD WriteColor = 0xFFFF0000;
         DWORD ExpectedFlipColor = 0xFFFFFF00;
-        DWORD PlayWindowColor = 0xFFFF00FF;
+        DWORD PlayWindowColor = 0xFF000000;
 
         int Top = PadY;
         int Bottom = PadY + LineHeight;

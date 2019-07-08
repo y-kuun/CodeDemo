@@ -22,12 +22,15 @@
 
 ## 总结
 
-* 前面一大部分
+* 前面一大部分都在调试，发现的Sound Gap
+* 后面一部分
 	
   
-# day020 Debugging the Audio Sync
+# Handmade Hero day020, Debugging the Audio Sync
 
-* 问题产生的原因
+* Audio Lantency
+  
+  * 对于声音变化的敏感程度的描述
 
 ![day020-01](day020-01.png)
 
@@ -75,4 +78,16 @@ else
 	                GlobalSoundOutput.SafetyBytes);
 }
 TargetCursor = (TargetCursor % GlobalSoundOutput.SecondaryBufferSize);
+```
+![day020-02](day020-02.png)
+
+```
+Marker->OutputPlayCursor = PlayCursor;
+Marker->OutputWriteCursor = WriteCursor;
+Marker->OutputLocation = ByteToLock;
+Marker->OutputByteCount = BytesToWrite;
+Marker->ExpectedFlipPlayCursor = ExpectedFrameBoundaryByte;
+// at flip phase
+Marker->FlipPlayCursor = PCursor;
+Marker->FlipWriteCursor = WCursor;
 ```
