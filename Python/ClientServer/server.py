@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import socket
+import select
+import time
+import struct
 
 LISTEN_PORT = 4121
 
@@ -31,22 +34,42 @@ class Server(object):
 		self.sock.bind(self.address)
 
 	def listen(self):
+		rlist, wlist, xlist = [], [], []
+		rlist.append(self.sock)
+		self.sock.listen(10)
+		print('start listen .......')
 		while True:
-			print('start listen ....')
-			try:
-				self.sock.listen(10)
-				conn, addr = self.sock.accept()
-			except socket.timeout:
-				print('next round')
-				continue
-			print('Connected by ', addr)
-			data = self.recvall(conn)
-			print('recv %s byte(s)' % len(data))
-			self.sendall(conn, data)
-
+			rl, wl, error = select.select(rlist, wlist, xlist, 5)
+			if rl and wl and error:
+				print('current select: {} {} {}'.format(rl, wl, error))
+			for s in rl:
+				if s == self.sock:
+					conn, addr = self.sock.accept()
+					print('Connected by ', addr)
+					rlist.append(conn)
+				else:
+					try:
+						data = self.recvall(s)
+						if data:
+							print('recv %s byte(s) do echo !!!!' % len(data))
+						else:
+							print('sync timestamp !!!')						
+							data = struct.pack('i', time.time())
+						self.sendall(s, data)
+					except socket.error:
+						print('Remove sock {} for send/recv errors!!!'.format(s))
+						if s in rlist:
+							rlist.remove(s)
+					
 	def sendall(self, sock, data):
 		if sock:
 			sock.sendall(data)
+
+	def close(self, sock=None):
+		if not sock:
+			sock = self.sock
+		if sock:
+			sock.close()
 			
 	def recvall(self, sock):
 		if not sock:

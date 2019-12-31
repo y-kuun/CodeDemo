@@ -24,8 +24,8 @@ class Client(object):
 		# Socket Type: https://docs.oracle.com/cd/E19455-01/806-1017/sockets-4/index.html
 		# Address Family: https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/rzab6/address.htm
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.sock.settimeout(0.01)
 		self.connect()
-		# self.sock.settimeout(0.01)
 		
 	def connect(self):
 		self.sock.connect(self.address)
